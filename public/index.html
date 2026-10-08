@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=639-1">
-  <script type="module" src="/app.mjs?v=639-1"></script>
+  <link rel="stylesheet" href="/style.css?v=642-1">
+  <script type="module" src="/app.mjs?v=642-1"></script>
 </head>
 <body>
   <main>
@@ -43,6 +43,16 @@
             <button id="move-down" type="button">Move down</button>
           </div>
         </div>
+        <details id="mask-geometry">
+          <summary>Change the gaps</summary>
+          <div class="geometry-buttons">
+            <button id="mask-turn-left" type="button">Turn the mask left</button>
+            <button id="mask-reflect" type="button">Reflect the mask</button>
+            <button id="mask-shrink" type="button">Shrink the gaps</button>
+            <button id="mask-expand" type="button">Widen the gaps</button>
+          </div>
+          <p id="mask-geometry-help">These changes keep the holes together as a shape, but change their gaps or direction. The bright stripes change with them.</p>
+        </details>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>
       <section class="screen" aria-labelledby="sky-heading">

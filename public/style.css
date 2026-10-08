@@ -3,7 +3,7 @@
   font-family: system-ui, sans-serif;
   background: #080e19;
   color: #eef4ff;
-  --panel: #111c2b;
+  --panel: #101c2a;
   --line: #30435a;
   --muted: #afbed1;
   --gold: #ffd38a;
@@ -25,7 +25,7 @@ h2 { font-size: 16px; font-weight: 600; margin: 0; }
 #hole-count { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
 button { font: inherit; font-size: 14px; color: #eef4ff; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; min-height: 44px; min-width: 44px; padding: 8px 12px; cursor: pointer; }
 button:hover { border-color: var(--muted); }
-button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold); background: #111c2b; }
+button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold); background: var(--panel); }
 :focus-visible { outline: 3px solid var(--selected); outline-offset: 3px; }
 .presets { display: flex; gap: 8px; margin-bottom: 12px; }
 .presets button { flex: 1; }
@@ -45,6 +45,12 @@ input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px
 .translation { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
 .translation p { margin: 12px 0; color: var(--muted); font-size: 14px; }
 .move-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+#mask-geometry { margin-top: 20px; padding: 0 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 14px; }
+#mask-geometry summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
+#mask-geometry .geometry-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+#mask-geometry .geometry-buttons button { flex: 1 1 140px; }
+#mask-geometry-help { color: var(--muted); margin: 12px 0; }
+#mask-geometry [hidden] { display: none !important; }
 #status { min-height: 3em; font-size: 14px; color: var(--gold); margin: 12px 0 0; }
 .sky-frame { width: 100%; aspect-ratio: 1; background: #080e19; outline: 1px solid var(--line); }
 #sky { display: block; width: 100%; height: 100%; image-rendering: auto; touch-action: none; cursor: crosshair; }

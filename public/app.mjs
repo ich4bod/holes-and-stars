@@ -237,6 +237,45 @@ for (const [direction, dx, dy] of [
   $(`#move-${direction}`).addEventListener('click', () => moveMask(dx, dy));
 }
 
+// Check every opening and pair before assigning any part of a new mask.
+function maskCandidateMessage(candidate) {
+  if (candidate.some(point => !Number.isFinite(point.x) || !Number.isFinite(point.y)
+      || point.x < -1 || point.x > 1 || point.y < -1 || point.y > 1)) return messages.edge;
+  for (let index = 0; index < candidate.length; index++) {
+    for (let other = 0; other < index; other++) {
+      if (Math.hypot(candidate[index].x - candidate[other].x,
+        candidate[index].y - candidate[other].y) < .08) return messages.near;
+    }
+  }
+  return '';
+}
+
+function changeMask(transform) {
+  const candidate = state.points.map(transform);
+  const rejection = maskCandidateMessage(candidate);
+  status.textContent = rejection;
+  if (rejection || candidate.every((point, index) =>
+    point.x === state.points[index].x && point.y === state.points[index].y)) return;
+  state.points = candidate;
+  sourceChanged();
+}
+
+for (const [id, transform] of [
+  ['mask-turn-left', point => ({
+    x: roundCoordinate(-point.y), y: roundCoordinate(point.x),
+  })],
+  ['mask-reflect', point => ({ x: roundCoordinate(-point.x), y: point.y })],
+  ['mask-shrink', point => ({
+    x: roundCoordinate(point.x * .8), y: roundCoordinate(point.y * .8),
+  })],
+  ['mask-expand', point => ({
+    x: roundCoordinate(point.x * 1.25), y: roundCoordinate(point.y * 1.25),
+  })],
+]) {
+  // Keep rejected actions available: the same candidate guard reports why.
+  $(`#${id}`).addEventListener('click', () => changeMask(transform));
+}
+
 function validPoint(point, skip = -1) {
   if (!Number.isFinite(point.x) || !Number.isFinite(point.y)
       || point.x < -1 || point.x > 1 || point.y < -1 || point.y > 1) {
