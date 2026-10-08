@@ -215,6 +215,28 @@ const messages = {
 };
 const roundCoordinate = value => Math.round(value * 1e10) / 1e10;
 
+// Build and validate the entire translated mask before changing any state.
+// Round only the edited axis; the untouched coordinates retain their exact values.
+function moveMask(dx, dy) {
+  const candidate = state.points.map(point => ({
+    x: dx === 0 ? point.x : roundCoordinate(point.x + dx),
+    y: dy === 0 ? point.y : roundCoordinate(point.y + dy),
+  }));
+  if (candidate.some(point => point.x < -1 || point.x > 1 || point.y < -1 || point.y > 1)) {
+    status.textContent = messages.edge;
+    return;
+  }
+  state.points = candidate;
+  status.textContent = '';
+  sourceChanged();
+}
+
+for (const [direction, dx, dy] of [
+  ['left', -.1, 0], ['right', .1, 0], ['up', 0, .1], ['down', 0, -.1],
+]) {
+  $(`#move-${direction}`).addEventListener('click', () => moveMask(dx, dy));
+}
+
 function validPoint(point, skip = -1) {
   if (!Number.isFinite(point.x) || !Number.isFinite(point.y)
       || point.x < -1 || point.x > 1 || point.y < -1 || point.y > 1) {

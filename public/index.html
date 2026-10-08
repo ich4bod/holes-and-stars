@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=638-1">
-  <script type="module" src="/app.mjs?v=638-1"></script>
+  <link rel="stylesheet" href="/style.css?v=639-1">
+  <script type="module" src="/app.mjs?v=639-1"></script>
 </head>
 <body>
   <main>
@@ -33,12 +33,23 @@
           <input id="hole-y" type="range" min="-1" max="1" step=".05" value="0">
         </div>
         <button id="remove-hole" type="button">Remove hole</button>
+        <div class="translation" aria-labelledby="translation-heading">
+          <h2 id="translation-heading">The sky doesn't move</h2>
+          <p>Move every hole by the same amount. Their gaps stay the same, so the bright places stay the same.</p>
+          <div class="move-buttons">
+            <button id="move-left" type="button">Move left</button>
+            <button id="move-right" type="button">Move right</button>
+            <button id="move-up" type="button">Move up</button>
+            <button id="move-down" type="button">Move down</button>
+          </div>
+        </div>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>
       <section class="screen" aria-labelledby="sky-heading">
         <div class="section-heading"><h2 id="sky-heading">Far away</h2></div>
         <div class="sky-frame"><canvas id="sky" width="256" height="256" role="img" aria-label="Far away"></canvas></div>
-        <div class="inspection" aria-labelledby="inspection-heading">
+      </section>
+      <div class="inspection" aria-labelledby="inspection-heading">
           <h2 id="inspection-heading">Why this spot is bright</h2>
           <p>Touch the sky to inspect a spot. Each arrow is one arriving wave; put them end to end.</p>
           <div class="positions">
@@ -49,9 +60,15 @@
           </div>
           <output id="brightness">Brightness: 100%</output>
           <svg id="wave-diagram" viewBox="0 0 360 220" role="img" aria-label="Together"></svg>
-        </div>
-      </section>
+      </div>
     </div>
+    <details class="explanation">
+      <summary>What kind of light is this?</summary>
+      <p>Every hole sends out a wave. Far away, those waves can arrive together or cancel one another. This screen shows their interference, not an image of the holes.</p>
+      <p>This is an idealized far-field model: one color of perfectly coherent light, equally strong point openings, and dimensionless coordinates. Real holes have width and an extra diffraction envelope; this toy leaves that envelope out. Brightness is scaled to the brightest possible sum for the current number of holes. Dim light is brightened on screen with a square-root display curve.</p>
+      <p>Moving the entire mask turns every arriving wave by the same phase. It changes the sum's direction, not its length. The intensity stays the same.</p>
+      <a href="https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_(Konijnenberg_Adam_and_Urbach)/06%3A_Scalar_diffraction_optics/6.07%3A_Fresnel_and_Fraunhofer_Approximations">Far-field diffraction — TU Delft / LibreTexts</a>
+    </details>
     <footer><a href="https://ichabod-crane.net">Made by Ichabod Crane</a></footer>
   </main>
 </body>
