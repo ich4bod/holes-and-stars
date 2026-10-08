@@ -1,0 +1,219 @@
+import { PRESETS, raster } from './model.mjs?v=636-1';
+
+const $ = selector => document.querySelector(selector);
+const mask = $('#mask');
+const holeList = $('#hole-list');
+const ranges = { x: $('#hole-x'), y: $('#hole-y') };
+const status = $('#status');
+const state = {
+  points: PRESETS.pair.map(point => ({ ...point })),
+  selected: 0,
+  probe: { u: 0, v: 0 },
+};
+const svgNS = 'http://www.w3.org/2000/svg';
+
+function svgElement(name, attributes) {
+  const element = document.createElementNS(svgNS, name);
+  for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, value);
+  return element;
+}
+
+function renderSource() {
+  const maskWidth = mask.getBoundingClientRect().width;
+  const hitRadius = maskWidth > 0 ? Math.max(.145, 45 / maskWidth) : .145;
+  mask.replaceChildren(...state.points.map((point, index) => {
+    const group = svgElement('g', {
+      class: `hole${index === state.selected ? ' selected' : ''}`,
+      'data-hole-index': index,
+      'data-x': point.x,
+      'data-y': point.y,
+    });
+    group.append(
+      svgElement('circle', { cx: point.x, cy: -point.y, r: hitRadius, fill: 'transparent' }),
+      svgElement('circle', { cx: point.x, cy: -point.y, r: .068, class: 'halo' }),
+      svgElement('circle', { cx: point.x, cy: -point.y, r: .025, class: 'pin' }),
+    );
+    return group;
+  }));
+  if (holeList.children.length !== state.points.length) {
+    holeList.replaceChildren(...state.points.map((_, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = `Hole ${index + 1}`;
+      button.addEventListener('click', () => selectHole(index));
+      return button;
+    }));
+  }
+  [...holeList.children].forEach((button, index) => {
+    button.setAttribute('aria-pressed', String(index === state.selected));
+  });
+  const point = state.points[state.selected];
+  for (const axis of ['x', 'y']) {
+    ranges[axis].value = point[axis];
+    $(`#hole-${axis}-value`).textContent = point[axis].toFixed(2);
+  }
+  $('#hole-count').textContent = `${state.points.length} of 8 holes`;
+}
+
+function selectHole(index) {
+  state.selected = index;
+  status.textContent = '';
+  renderSource();
+}
+
+function sourceChanged() {
+  renderSource();
+  scheduleSky();
+}
+
+for (const button of document.querySelectorAll('[data-preset]')) {
+  button.addEventListener('click', () => {
+    state.points = PRESETS[button.dataset.preset].map(point => ({ ...point }));
+    state.selected = 0;
+    status.textContent = '';
+    sourceChanged();
+  });
+}
+
+for (const axis of ['x', 'y']) {
+  ranges[axis].addEventListener('input', () => {
+    moveHole({ ...state.points[state.selected], [axis]: Number(ranges[axis].value) });
+  });
+}
+
+const sky = $('#sky');
+const context = sky.getContext('2d');
+let skyFrame = null;
+
+function drawSky() {
+  // A hidden or collapsed scene is redrawn when ResizeObserver sees it again.
+  const bounds = sky.getBoundingClientRect();
+  if (bounds.width === 0 || bounds.height === 0) return;
+  context.putImageData(new ImageData(raster(state.points, 256), 256, 256), 0, 0);
+}
+
+function scheduleSky() {
+  if (skyFrame !== null) return;
+  skyFrame = requestAnimationFrame(() => {
+    skyFrame = null;
+    drawSky();
+  });
+}
+
+new ResizeObserver(scheduleSky).observe(sky);
+new ResizeObserver(renderSource).observe(mask);
+
+const messages = {
+  limit: 'Eight holes is enough for this sky. Remove one to make room.',
+  near: 'Leave a little space between holes.',
+  minimum: 'Keep one hole to light the screen.',
+  edge: 'The whole mask has reached the edge.',
+};
+const roundCoordinate = value => Math.round(value * 1e10) / 1e10;
+
+function validPoint(point, skip = -1) {
+  if (!Number.isFinite(point.x) || !Number.isFinite(point.y)
+      || point.x < -1 || point.x > 1 || point.y < -1 || point.y > 1) {
+    status.textContent = messages.edge;
+    return false;
+  }
+  if (state.points.some((other, index) => index !== skip
+      && Math.hypot(other.x - point.x, other.y - point.y) < .08)) {
+    status.textContent = messages.near;
+    return false;
+  }
+  return true;
+}
+
+function moveHole(point) {
+  point = { x: roundCoordinate(point.x), y: roundCoordinate(point.y) };
+  if (!validPoint(point, state.selected)) {
+    renderSource(); // Restore a rejected native range edit to the actual position.
+    return;
+  }
+  status.textContent = '';
+  const previous = state.points[state.selected];
+  if (point.x === previous.x && point.y === previous.y) return;
+  state.points[state.selected] = point;
+  sourceChanged();
+}
+
+function addHole(point) {
+  if (state.points.length === 8) {
+    status.textContent = messages.limit;
+    return;
+  }
+  point = { x: roundCoordinate(point.x), y: roundCoordinate(point.y) };
+  if (!validPoint(point)) return;
+  state.points.push(point);
+  state.selected = state.points.length - 1;
+  status.textContent = '';
+  sourceChanged();
+}
+
+$('#remove-hole').addEventListener('click', () => {
+  if (state.points.length === 1) {
+    status.textContent = messages.minimum;
+    return;
+  }
+  state.points.splice(state.selected, 1);
+  state.selected = Math.min(state.selected, state.points.length - 1);
+  status.textContent = '';
+  sourceChanged();
+});
+
+function maskPoint(event) {
+  const bounds = mask.getBoundingClientRect();
+  return {
+    x: -1 + 2 * (event.clientX - bounds.left) / bounds.width,
+    y: 1 - 2 * (event.clientY - bounds.top) / bounds.height,
+  };
+}
+
+let gesture = null;
+mask.addEventListener('pointerdown', event => {
+  if (!event.isPrimary || event.button !== 0 || gesture) return;
+  const hole = event.target.closest('[data-hole-index]');
+  const index = hole ? Number(hole.dataset.holeIndex) : null;
+  if (index !== null) selectHole(index);
+  gesture = {
+    id: event.pointerId,
+    index,
+    start: maskPoint(event),
+    origin: index === null ? null : { ...state.points[index] },
+    clientX: event.clientX,
+    clientY: event.clientY,
+    moved: false,
+  };
+  // Capture on the persistent plane: its hole children are replaced during edits.
+  mask.setPointerCapture(event.pointerId);
+  event.preventDefault();
+});
+mask.addEventListener('pointermove', event => {
+  if (!gesture || gesture.id !== event.pointerId) return;
+  if (Math.hypot(event.clientX - gesture.clientX, event.clientY - gesture.clientY) > 8) {
+    gesture.moved = true;
+  }
+  if (gesture.index === null) return;
+  const point = maskPoint(event);
+  moveHole({
+    x: gesture.origin.x + point.x - gesture.start.x,
+    y: gesture.origin.y + point.y - gesture.start.y,
+  });
+});
+mask.addEventListener('pointerup', event => {
+  if (!gesture || gesture.id !== event.pointerId) return;
+  const finished = gesture;
+  gesture = null;
+  if (mask.hasPointerCapture(event.pointerId)) mask.releasePointerCapture(event.pointerId);
+  // Only an empty-plane tap adds; a drag never becomes an add on release.
+  if (finished.index === null && !finished.moved) addHole(maskPoint(event));
+});
+function cancelGesture(event) {
+  if (gesture?.id === event.pointerId) gesture = null;
+}
+mask.addEventListener('pointercancel', cancelGesture);
+mask.addEventListener('lostpointercapture', cancelGesture);
+
+renderSource();
+drawSky();

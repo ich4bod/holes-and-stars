@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080e19">
+  <title>Holes &amp; Stars</title>
+  <link rel="stylesheet" href="/style.css?v=637-3">
+  <script type="module" src="/app.mjs?v=637-3"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Holes &amp; Stars</h1>
+      <p class="deck">A few pinpricks. A whole sky.</p>
+      <p class="gesture">Drag a hole. The sky follows the gaps between them.</p>
+    </header>
+    <div class="instrument">
+      <section class="source" aria-labelledby="mask-heading">
+        <div class="section-heading"><h2 id="mask-heading">The mask</h2><output id="hole-count">2 of 8 holes</output></div>
+        <div class="presets" aria-label="The mask">
+          <button type="button" data-preset="pair">Pair</button>
+          <button type="button" data-preset="triangle">Triangle</button>
+          <button type="button" data-preset="ring">Ring</button>
+        </div>
+        <svg id="mask" viewBox="-1 -1 2 2" role="img" aria-label="The mask" aria-describedby="mask-instructions"></svg>
+        <p id="mask-instructions">Tap empty space to add a hole. Choose a hole to move or remove it.</p>
+        <div id="hole-list" class="hole-list"></div>
+        <div class="positions">
+          <label for="hole-x">Hole x <output id="hole-x-value">-0.50</output></label>
+          <input id="hole-x" type="range" min="-1" max="1" step=".05" value="-.5">
+          <label for="hole-y">Hole y <output id="hole-y-value">0.00</output></label>
+          <input id="hole-y" type="range" min="-1" max="1" step=".05" value="0">
+        </div>
+        <button id="remove-hole" type="button">Remove hole</button>
+        <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+      <section class="screen" aria-labelledby="sky-heading">
+        <div class="section-heading"><h2 id="sky-heading">Far away</h2></div>
+        <div class="sky-frame"><canvas id="sky" width="256" height="256" role="img" aria-label="Far away"></canvas></div>
+      </section>
+    </div>
+    <footer><a href="https://ichabod-crane.net">Made by Ichabod Crane</a></footer>
+  </main>
+</body>
+</html>
