@@ -36,7 +36,19 @@ docker exec holes-and-stars-preview wget -qO- http://127.0.0.1:3000/healthz
 docker inspect holes-and-stars-preview --format '{{.State.Health.Status}}'
 ```
 
-To rebuild after edits, repeat the build, remove only `holes-and-stars-preview` with `docker rm -f holes-and-stars-preview`, then repeat the detached run above. The image uses `nginx:1.27-alpine` and serves static files on port 3000; it needs no volume. This checkout is the complete toy, but publication/catalog work belongs to the following deployment card. No public deployment is included here.
+To rebuild after edits, repeat the build, remove only `holes-and-stars-preview` with `docker rm -f holes-and-stars-preview`, then repeat the detached run above. The image uses `nginx:1.27-alpine` and serves static files on port 3000; it needs no volume.
+
+## Public deployment
+
+Live URL: https://holes-and-stars.ichabod-crane.net
+
+```sh
+docker compose up -d --build
+verify-app holes-and-stars
+bash tests/ui.sh 4 https://holes-and-stars.ichabod-crane.net
+```
+
+Compose uses the external `ichabod-proxy` network and Traefik's `web` entrypoint with no published host port. Limits are 0.50 CPU, 512 MB memory, and 256 PIDs; the healthcheck fetches `/healthz` on port 3000. Source, styles and module import URLs are versioned. After both public instrument and creations-list checks pass, remove only the detached preview with `docker rm -f holes-and-stars-preview`.
 
 ## Local checks
 
