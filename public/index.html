@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=646-1">
-  <script type="module" src="/app.mjs?v=646-1"></script>
+  <link rel="stylesheet" href="/style.css?v=653-1">
+  <script type="module" src="/app.mjs?v=653-1"></script>
 </head>
 <body>
   <main>
@@ -68,6 +68,19 @@
           <p id="mask-kept-info">No mask kept.</p>
           <p id="mask-keep-help">Keep the openings, not the inspected spot. Returning changes the mask once; Undo brings your experiment back.</p>
         </details>
+        <details id="opening-envelope">
+          <summary>Give the openings width</summary>
+          <div class="opening-controls">
+            <label for="opening-shape">Opening shape</label>
+            <select id="opening-shape">
+              <option value="point">Points</option>
+              <option value="square">Square · 0.25 × 0.25</option>
+              <option value="wide">Wide · 0.5 × 0.1</option>
+              <option value="tall">Tall · 0.1 × 0.5</option>
+            </select>
+          </div>
+          <p id="opening-envelope-help">The centers keep their gaps. Identical rectangular source patches add a broad envelope around the interference. The origin keeps the same normalized brightness; this is not a measurement of transmitted light. Overlapping patches add their fields, not a merged cutout.</p>
+        </details>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>
       <section class="screen" aria-labelledby="sky-heading">
@@ -104,8 +117,9 @@
     <details class="explanation">
       <summary>What kind of light is this?</summary>
       <p>Every hole sends out a wave. Far away, those waves can arrive together or cancel one another. This screen shows their interference, not an image of the holes.</p>
-      <p>This is an idealized far-field model: one color of perfectly coherent light, equally strong point openings, and dimensionless coordinates. Real holes have width and an extra diffraction envelope; this toy leaves that envelope out. Brightness is scaled to the brightest possible sum for the current number of holes. Dim light is brightened on screen with a square-root display curve.</p>
+      <p>This is an idealized far-field model: one color of perfectly coherent light and dimensionless coordinates. Points omit the diffraction envelope; rectangular source patches include it. Brightness is scaled to the strongest possible point sum for this number of centers. Dim light is brightened on screen with a square-root display curve.</p>
       <p>Moving the entire mask turns every arriving wave by the same phase. It changes the sum's direction, not its length. The intensity stays the same.</p>
+      <a href="https://www.opticsthewebsite.com/Rectangular">Rectangular opening background</a>
       <a href="https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_(Konijnenberg_Adam_and_Urbach)/06%3A_Scalar_diffraction_optics/6.07%3A_Fresnel_and_Fraunhofer_Approximations">Far-field diffraction — TU Delft / LibreTexts</a>
     </details>
     <footer><a href="https://ichabod-crane.net">Made by Ichabod Crane</a></footer>

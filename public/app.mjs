@@ -1,4 +1,4 @@
-import { PRESETS, raster, field } from './model.mjs?v=636-1';
+import { PRESETS, raster, field } from './model.mjs?v=653-1';
 
 const $ = selector => document.querySelector(selector);
 const mask = $('#mask');
@@ -9,6 +9,7 @@ const state = {
   points: PRESETS.pair.map(point => ({ ...point })),
   selected: 0,
   probe: { u: 0, v: 0 },
+  opening: { shape: 'point', width: 0, height: 0 },
 };
 const svgNS = 'http://www.w3.org/2000/svg';
 const undoButton = $('#mask-undo');
@@ -152,7 +153,7 @@ function renderProbe() {
     $(`#probe-${axis}`).value = state.probe[axis];
     $(`#probe-${axis}-value`).textContent = state.probe[axis].toFixed(2);
   }
-  const sum = field(state.points, state.probe.u, state.probe.v);
+  const sum = field(state.points, state.probe.u, state.probe.v, state.opening);
   $('#brightness').textContent = `Brightness: ${Math.round(100 * sum.intensity)}%`;
   $('#selected-wave-label').textContent = `Hole ${state.selected + 1} arrives on the highlighted arrow.`;
   drawWaves(sum);
@@ -162,13 +163,23 @@ function renderProbe() {
 function drawSlice(sum) {
   const samples = Array.from({ length: 241 }, (_, i) => {
     const u = -6 + i * .05;
-    const intensity = field(state.points, u, state.probe.v).intensity;
+    const intensity = field(state.points, u, state.probe.v, state.opening).intensity;
     return `${10 + 380 * i / 240},${150 - 140 * intensity}`;
   });
   $('#slice-line').setAttribute('points', samples.join(' '));
   $('#slice-probe').setAttribute('cx', 10 + (state.probe.u + 6) * 380 / 12);
   $('#slice-probe').setAttribute('cy', 150 - 140 * sum.intensity);
 }
+
+$('#opening-shape').addEventListener('change', event => {
+  const shapes = {
+    point: [0, 0], square: [.25, .25], wide: [.5, .1], tall: [.1, .5],
+  };
+  const [width, height] = shapes[event.target.value];
+  state.opening = { shape: event.target.value, width, height };
+  scheduleProbe();
+  scheduleSky();
+});
 
 $('#screen-slice').addEventListener('toggle', () => {
   if ($('#screen-slice').open) scheduleProbe();
@@ -187,9 +198,8 @@ function drawWaves(sum) {
     marker.append(svgElement('path', { d: 'M 0 0 L 10 5 L 0 10 Z', fill: color }));
     defs.append(marker);
   }
-  // The raw-vector scale depends only on hole count, never on the sum or
-  // intensity. The entire chain spans at most 160 units, including at a null.
-  // Use this SAME scale for unit waves and the unnormalized resultant.
+  // This same scale depends only on opening count, not envelope brightness.
+  // Use it for envelope-scaled waves and their unnormalized resultant.
   const scale = 160 / state.points.length;
   const vertices = [{ x: 0, y: 0 }];
   for (const wave of sum.waves) {
@@ -298,7 +308,7 @@ function drawSky() {
   // A hidden or collapsed scene is redrawn when ResizeObserver sees it again.
   const bounds = sky.getBoundingClientRect();
   if (bounds.width === 0 || bounds.height === 0) return;
-  context.putImageData(new ImageData(raster(state.points, 256), 256, 256), 0, 0);
+  context.putImageData(new ImageData(raster(state.points, 256, state.opening), 256, 256), 0, 0);
 }
 
 function scheduleSky() {

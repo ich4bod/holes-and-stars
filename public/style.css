@@ -64,6 +64,12 @@ input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px
 #mask-kept-info { color: var(--gold); margin: 12px 0; }
 #mask-keep-help { color: var(--muted); margin: 12px 0; }
 #mask-memory [hidden] { display: none !important; }
+#opening-envelope { margin-top: 20px; padding: 0 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 14px; }
+#opening-envelope summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
+#opening-envelope .opening-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+#opening-envelope label { flex: 1 1 120px; }
+#opening-shape { flex: 2 1 180px; min-width: 0; min-height: 44px; padding: 8px; color: #eef4ff; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+#opening-envelope-help { color: var(--muted); margin: 12px 0; }
 #status { min-height: 3em; font-size: 14px; color: var(--gold); margin: 12px 0 0; }
 .sky-frame { width: 100%; aspect-ratio: 1; background: #080e19; outline: 1px solid var(--line); }
 #sky { display: block; width: 100%; height: 100%; image-rendering: auto; touch-action: none; cursor: crosshair; }
