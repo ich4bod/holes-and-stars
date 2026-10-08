@@ -144,6 +144,7 @@ function selectHole(index) {
   state.selected = index;
   status.textContent = '';
   renderSource();
+  scheduleProbe();
 }
 
 function renderProbe() {
@@ -153,6 +154,7 @@ function renderProbe() {
   }
   const sum = field(state.points, state.probe.u, state.probe.v);
   $('#brightness').textContent = `Brightness: ${Math.round(100 * sum.intensity)}%`;
+  $('#selected-wave-label').textContent = `Hole ${state.selected + 1} arrives on the highlighted arrow.`;
   drawWaves(sum);
   drawSlice(sum);
 }
@@ -175,7 +177,9 @@ $('#screen-slice').addEventListener('toggle', () => {
 function drawWaves(sum) {
   const diagram = $('#wave-diagram');
   const defs = svgElement('defs', {});
-  for (const [id, color, size] of [['wave-tip', '#b9ddff', 7], ['sum-tip', '#ffd38a', 5]]) {
+  for (const [id, color, size] of [
+    ['wave-tip', '#b9ddff', 7], ['selected-wave-tip', '#fff0d0', 7], ['sum-tip', '#ffd38a', 5],
+  ]) {
     const marker = svgElement('marker', {
       id, viewBox: '0 0 10 10', refX: 9, refY: 5,
       markerWidth: size, markerHeight: size, markerUnits: 'userSpaceOnUse', orient: 'auto',
@@ -200,9 +204,12 @@ function drawWaves(sum) {
   sum.waves.forEach((_, index) => {
     const start = vertices[index];
     const end = vertices[index + 1];
+    const selected = index === state.selected;
     chain.append(svgElement('line', {
-      'data-wave': index, x1: start.x, y1: start.y, x2: end.x, y2: end.y,
-      stroke: '#b9ddff', 'stroke-width': 3, 'marker-end': 'url(#wave-tip)',
+      'data-wave': index, 'data-selected': String(selected),
+      x1: start.x, y1: start.y, x2: end.x, y2: end.y,
+      stroke: selected ? '#fff0d0' : '#b9ddff', 'stroke-width': selected ? 4 : 3,
+      'marker-end': `url(#${selected ? 'selected-wave-tip' : 'wave-tip'})`,
     }));
   });
   chain.append(svgElement('line', {

@@ -72,6 +72,7 @@ input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px
 .inspection .positions { margin-top: 16px; }
 #brightness { display: block; font-size: 14px; color: var(--gold); font-variant-numeric: tabular-nums; }
 #wave-diagram { display: block; width: 100%; max-width: 360px; margin: 12px auto 0; }
+#selected-wave-label { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
 #screen-slice { margin-top: 20px; border-top: 1px solid var(--line); font-size: 14px; }
 #screen-slice summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
 #slice-plot { display: block; width: 100%; max-width: 400px; margin: 12px auto 0; }
