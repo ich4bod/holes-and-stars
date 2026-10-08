@@ -72,6 +72,12 @@ input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px
 .inspection .positions { margin-top: 16px; }
 #brightness { display: block; font-size: 14px; color: var(--gold); font-variant-numeric: tabular-nums; }
 #wave-diagram { display: block; width: 100%; max-width: 360px; margin: 12px auto 0; }
+#screen-slice { margin-top: 20px; border-top: 1px solid var(--line); font-size: 14px; }
+#screen-slice summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
+#slice-plot { display: block; width: 100%; max-width: 400px; margin: 12px auto 0; }
+#slice-plot text { fill: var(--muted); font-size: 10px; }
+#slice-plot .slice-axis { stroke: var(--line); stroke-width: 1; }
+#screen-slice [hidden] { display: none !important; }
 .explanation { margin-top: 28px; padding: 0 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 14px; }
 .explanation summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
 .explanation p { max-width: 80ch; color: var(--muted); }

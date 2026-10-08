@@ -154,7 +154,23 @@ function renderProbe() {
   const sum = field(state.points, state.probe.u, state.probe.v);
   $('#brightness').textContent = `Brightness: ${Math.round(100 * sum.intensity)}%`;
   drawWaves(sum);
+  drawSlice(sum);
 }
+
+function drawSlice(sum) {
+  const samples = Array.from({ length: 241 }, (_, i) => {
+    const u = -6 + i * .05;
+    const intensity = field(state.points, u, state.probe.v).intensity;
+    return `${10 + 380 * i / 240},${150 - 140 * intensity}`;
+  });
+  $('#slice-line').setAttribute('points', samples.join(' '));
+  $('#slice-probe').setAttribute('cx', 10 + (state.probe.u + 6) * 380 / 12);
+  $('#slice-probe').setAttribute('cy', 150 - 140 * sum.intensity);
+}
+
+$('#screen-slice').addEventListener('toggle', () => {
+  if ($('#screen-slice').open) scheduleProbe();
+});
 
 function drawWaves(sum) {
   const diagram = $('#wave-diagram');
