@@ -11,6 +11,59 @@ const state = {
   probe: { u: 0, v: 0 },
 };
 const svgNS = 'http://www.w3.org/2000/svg';
+const undoButton = $('#mask-undo');
+const redoButton = $('#mask-redo');
+const past = [];
+const future = [];
+const copyPoints = points => points.map(point => ({ ...point }));
+const snapshot = () => ({ points: copyPoints(state.points), selected: state.selected });
+const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
+  point.x === b[index].x && point.y === b[index].y);
+
+function updateHistoryButtons() {
+  undoButton.disabled = gesture !== null || past.length === 0;
+  redoButton.disabled = gesture !== null || future.length === 0;
+}
+
+function pushSnapshot(stack, saved) {
+  stack.push(saved);
+  if (stack.length > 32) stack.shift();
+}
+
+function recordMaskEdit(before) {
+  if (sameMask(before.points, state.points)) return;
+  pushSnapshot(past, before);
+  future.length = 0;
+}
+
+// All accepted point mutations pass here. A captured drag previews changes
+// immediately, but retains only the snapshot before its first accepted move.
+function commitMask(points, selected = state.selected) {
+  const changed = !sameMask(points, state.points);
+  const before = changed ? snapshot() : null;
+  if (changed && gesture !== null && gesture.index !== null && !gesture.before) {
+    gesture.before = before;
+  }
+  state.points = copyPoints(points);
+  state.selected = Math.max(0, Math.min(selected, state.points.length - 1));
+  status.textContent = '';
+  if (changed && (gesture === null || gesture.index === null)) recordMaskEdit(before);
+  sourceChanged();
+  updateHistoryButtons();
+}
+
+function restoreMask(from, to) {
+  if (gesture !== null || from.length === 0) return;
+  pushSnapshot(to, snapshot());
+  const saved = from.pop();
+  state.points = copyPoints(saved.points);
+  state.selected = Math.max(0, Math.min(saved.selected, state.points.length - 1));
+  status.textContent = '';
+  sourceChanged();
+  updateHistoryButtons();
+}
+undoButton.addEventListener('click', () => restoreMask(past, future));
+redoButton.addEventListener('click', () => restoreMask(future, past));
 
 function svgElement(name, attributes) {
   const element = document.createElementNS(svgNS, name);
@@ -123,10 +176,7 @@ function sourceChanged() {
 
 for (const button of document.querySelectorAll('[data-preset]')) {
   button.addEventListener('click', () => {
-    state.points = PRESETS[button.dataset.preset].map(point => ({ ...point }));
-    state.selected = 0;
-    status.textContent = '';
-    sourceChanged();
+    commitMask(PRESETS[button.dataset.preset], 0);
   });
 }
 
@@ -226,9 +276,7 @@ function moveMask(dx, dy) {
     status.textContent = messages.edge;
     return;
   }
-  state.points = candidate;
-  status.textContent = '';
-  sourceChanged();
+  commitMask(candidate);
 }
 
 for (const [direction, dx, dy] of [
@@ -256,8 +304,7 @@ function changeMask(transform) {
   status.textContent = rejection;
   if (rejection || candidate.every((point, index) =>
     point.x === state.points[index].x && point.y === state.points[index].y)) return;
-  state.points = candidate;
-  sourceChanged();
+  commitMask(candidate);
 }
 
 for (const [id, transform] of [
@@ -299,8 +346,9 @@ function moveHole(point) {
   status.textContent = '';
   const previous = state.points[state.selected];
   if (point.x === previous.x && point.y === previous.y) return;
-  state.points[state.selected] = point;
-  sourceChanged();
+  const candidate = copyPoints(state.points);
+  candidate[state.selected] = point;
+  commitMask(candidate);
 }
 
 function addHole(point) {
@@ -310,10 +358,7 @@ function addHole(point) {
   }
   point = { x: roundCoordinate(point.x), y: roundCoordinate(point.y) };
   if (!validPoint(point)) return;
-  state.points.push(point);
-  state.selected = state.points.length - 1;
-  status.textContent = '';
-  sourceChanged();
+  commitMask([...state.points, point], state.points.length);
 }
 
 $('#remove-hole').addEventListener('click', () => {
@@ -321,10 +366,7 @@ $('#remove-hole').addEventListener('click', () => {
     status.textContent = messages.minimum;
     return;
   }
-  state.points.splice(state.selected, 1);
-  state.selected = Math.min(state.selected, state.points.length - 1);
-  status.textContent = '';
-  sourceChanged();
+  commitMask(state.points.filter((_, index) => index !== state.selected));
 });
 
 function maskPoint(event) {
@@ -349,7 +391,9 @@ mask.addEventListener('pointerdown', event => {
     clientX: event.clientX,
     clientY: event.clientY,
     moved: false,
+    before: null,
   };
+  updateHistoryButtons();
   // Capture on the persistent plane: its hole children are replaced during edits.
   mask.setPointerCapture(event.pointerId);
   event.preventDefault();
@@ -368,14 +412,21 @@ mask.addEventListener('pointermove', event => {
 });
 mask.addEventListener('pointerup', event => {
   if (!gesture || gesture.id !== event.pointerId) return;
-  const finished = gesture;
-  gesture = null;
+  const finished = finishGesture();
   if (mask.hasPointerCapture(event.pointerId)) mask.releasePointerCapture(event.pointerId);
   // Only an empty-plane tap adds; a drag never becomes an add on release.
   if (finished.index === null && !finished.moved) addHole(maskPoint(event));
 });
+function finishGesture() {
+  const finished = gesture;
+  gesture = null;
+  if (finished.before) recordMaskEdit(finished.before);
+  updateHistoryButtons();
+  return finished;
+}
 function cancelGesture(event) {
-  if (gesture?.id === event.pointerId) gesture = null;
+  // Cancellation keeps the last accepted preview, just like release.
+  if (gesture?.id === event.pointerId) finishGesture();
 }
 mask.addEventListener('pointercancel', cancelGesture);
 mask.addEventListener('lostpointercapture', cancelGesture);

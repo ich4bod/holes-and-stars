@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=642-1">
-  <script type="module" src="/app.mjs?v=642-1"></script>
+  <link rel="stylesheet" href="/style.css?v=643-1">
+  <script type="module" src="/app.mjs?v=643-1"></script>
 </head>
 <body>
   <main>
@@ -33,6 +33,11 @@
           <input id="hole-y" type="range" min="-1" max="1" step=".05" value="0">
         </div>
         <button id="remove-hole" type="button">Remove hole</button>
+        <div class="mask-history">
+          <button id="mask-undo" type="button" disabled>Undo mask change</button>
+          <button id="mask-redo" type="button" disabled>Redo mask change</button>
+        </div>
+        <p id="mask-history-help">Undo returns one mask edit. Inspecting the sky does not change the mask.</p>
         <div class="translation" aria-labelledby="translation-heading">
           <h2 id="translation-heading">The sky doesn't move</h2>
           <p>Move every hole by the same amount. Their gaps stay the same, so the bright places stay the same.</p>
