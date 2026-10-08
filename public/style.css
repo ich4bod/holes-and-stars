@@ -42,7 +42,12 @@ button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold);
 input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px; accent-color: var(--gold); cursor: pointer; }
 #status { min-height: 3em; font-size: 14px; color: var(--gold); margin: 12px 0 0; }
 .sky-frame { width: 100%; aspect-ratio: 1; background: #080e19; outline: 1px solid var(--line); }
-#sky { display: block; width: 100%; height: 100%; image-rendering: auto; }
+#sky { display: block; width: 100%; height: 100%; image-rendering: auto; touch-action: none; cursor: crosshair; }
+.inspection { margin-top: 24px; padding: 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+.inspection p { margin: 12px 0; color: var(--muted); font-size: 14px; }
+.inspection .positions { margin-top: 16px; }
+#brightness { display: block; font-size: 14px; color: var(--gold); font-variant-numeric: tabular-nums; }
+#wave-diagram { display: block; width: 100%; max-width: 360px; margin: 12px auto 0; }
 footer { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 20px; font-size: 14px; }
 a { color: var(--muted); text-underline-offset: 4px; }
 a:hover { color: #eef4ff; }

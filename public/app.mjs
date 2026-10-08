@@ -1,4 +1,4 @@
-import { PRESETS, raster } from './model.mjs?v=636-1';
+import { PRESETS, raster, field } from './model.mjs?v=636-1';
 
 const $ = selector => document.querySelector(selector);
 const mask = $('#mask');
@@ -61,8 +61,63 @@ function selectHole(index) {
   renderSource();
 }
 
+function renderProbe() {
+  for (const axis of ['u', 'v']) {
+    $(`#probe-${axis}`).value = state.probe[axis];
+    $(`#probe-${axis}-value`).textContent = state.probe[axis].toFixed(2);
+  }
+  const sum = field(state.points, state.probe.u, state.probe.v);
+  $('#brightness').textContent = `Brightness: ${Math.round(100 * sum.intensity)}%`;
+  drawWaves(sum);
+}
+
+function drawWaves(sum) {
+  const diagram = $('#wave-diagram');
+  const defs = svgElement('defs', {});
+  for (const [id, color, size] of [['wave-tip', '#b9ddff', 7], ['sum-tip', '#ffd38a', 5]]) {
+    const marker = svgElement('marker', {
+      id, viewBox: '0 0 10 10', refX: 9, refY: 5,
+      markerWidth: size, markerHeight: size, markerUnits: 'userSpaceOnUse', orient: 'auto',
+    });
+    marker.append(svgElement('path', { d: 'M 0 0 L 10 5 L 0 10 Z', fill: color }));
+    defs.append(marker);
+  }
+  // The raw-vector scale depends only on hole count, never on the sum or
+  // intensity. The entire chain spans at most 160 units, including at a null.
+  // Use this SAME scale for unit waves and the unnormalized resultant.
+  const scale = 160 / state.points.length;
+  const vertices = [{ x: 0, y: 0 }];
+  for (const wave of sum.waves) {
+    const last = vertices.at(-1);
+    vertices.push({ x: last.x + scale * wave.re, y: last.y - scale * wave.im });
+  }
+  const xs = vertices.map(point => point.x);
+  const ys = vertices.map(point => point.y);
+  const offsetX = 180 - (Math.min(...xs) + Math.max(...xs)) / 2;
+  const offsetY = 98 - (Math.min(...ys) + Math.max(...ys)) / 2;
+  const chain = svgElement('g', { transform: `translate(${offsetX} ${offsetY})` });
+  sum.waves.forEach((_, index) => {
+    const start = vertices[index];
+    const end = vertices[index + 1];
+    chain.append(svgElement('line', {
+      'data-wave': index, x1: start.x, y1: start.y, x2: end.x, y2: end.y,
+      stroke: '#b9ddff', 'stroke-width': 3, 'marker-end': 'url(#wave-tip)',
+    }));
+  });
+  chain.append(svgElement('line', {
+    'data-resultant': '', x1: 0, y1: 0, x2: scale * sum.re, y2: -scale * sum.im,
+    stroke: '#ffd38a', 'stroke-width': 1.5, 'stroke-dasharray': '4 3',
+    // A null retains its raw endpoint and DOM element, but no artificial arrowhead.
+    'marker-end': Math.hypot(sum.re, sum.im) > 1e-10 ? 'url(#sum-tip)' : 'none',
+  }));
+  const label = svgElement('text', { x: 180, y: 207, 'text-anchor': 'middle', fill: '#ffd38a' });
+  label.textContent = 'Together';
+  diagram.replaceChildren(defs, chain, label);
+}
+
 function sourceChanged() {
   renderSource();
+  scheduleProbe();
   scheduleSky();
 }
 
@@ -84,6 +139,55 @@ for (const axis of ['x', 'y']) {
 const sky = $('#sky');
 const context = sky.getContext('2d');
 let skyFrame = null;
+let probeFrame = null;
+
+function scheduleProbe() {
+  if (probeFrame !== null) return;
+  probeFrame = requestAnimationFrame(() => {
+    probeFrame = null;
+    renderProbe();
+  });
+}
+
+for (const axis of ['u', 'v']) {
+  $(`#probe-${axis}`).addEventListener('input', event => {
+    state.probe[axis] = Number(event.target.value);
+    scheduleProbe();
+  });
+}
+
+function inspectSky(event) {
+  const bounds = sky.getBoundingClientRect();
+  if (!bounds.width || !bounds.height) return;
+  // Use the displayed rectangle, not the 256-pixel raster dimensions.
+  const snap = value => Math.max(-6, Math.min(6, Math.round(value / .05) * .05));
+  state.probe.u = snap(-6 + 12 * (event.clientX - bounds.left) / bounds.width);
+  state.probe.v = snap(6 - 12 * (event.clientY - bounds.top) / bounds.height);
+  scheduleProbe();
+}
+
+let skyPointer = null;
+sky.addEventListener('pointerdown', event => {
+  if (!event.isPrimary || event.button !== 0 || skyPointer !== null) return;
+  skyPointer = event.pointerId;
+  sky.setPointerCapture(event.pointerId);
+  inspectSky(event);
+  event.preventDefault();
+});
+sky.addEventListener('pointermove', event => {
+  if (skyPointer === event.pointerId) inspectSky(event);
+});
+sky.addEventListener('pointerup', event => {
+  if (skyPointer !== event.pointerId) return;
+  inspectSky(event);
+  skyPointer = null;
+  if (sky.hasPointerCapture(event.pointerId)) sky.releasePointerCapture(event.pointerId);
+});
+function cancelSkyPointer(event) {
+  if (skyPointer === event.pointerId) skyPointer = null;
+}
+sky.addEventListener('pointercancel', cancelSkyPointer);
+sky.addEventListener('lostpointercapture', cancelSkyPointer);
 
 function drawSky() {
   // A hidden or collapsed scene is redrawn when ResizeObserver sees it again.
@@ -216,4 +320,5 @@ mask.addEventListener('pointercancel', cancelGesture);
 mask.addEventListener('lostpointercapture', cancelGesture);
 
 renderSource();
+renderProbe();
 drawSky();

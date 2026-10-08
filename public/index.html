@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=637-3">
-  <script type="module" src="/app.mjs?v=637-3"></script>
+  <link rel="stylesheet" href="/style.css?v=638-1">
+  <script type="module" src="/app.mjs?v=638-1"></script>
 </head>
 <body>
   <main>
@@ -38,6 +38,18 @@
       <section class="screen" aria-labelledby="sky-heading">
         <div class="section-heading"><h2 id="sky-heading">Far away</h2></div>
         <div class="sky-frame"><canvas id="sky" width="256" height="256" role="img" aria-label="Far away"></canvas></div>
+        <div class="inspection" aria-labelledby="inspection-heading">
+          <h2 id="inspection-heading">Why this spot is bright</h2>
+          <p>Touch the sky to inspect a spot. Each arrow is one arriving wave; put them end to end.</p>
+          <div class="positions">
+            <label for="probe-u">Screen u <output id="probe-u-value">0.00</output></label>
+            <input id="probe-u" type="range" min="-6" max="6" step=".05" value="0">
+            <label for="probe-v">Screen v <output id="probe-v-value">0.00</output></label>
+            <input id="probe-v" type="range" min="-6" max="6" step=".05" value="0">
+          </div>
+          <output id="brightness">Brightness: 100%</output>
+          <svg id="wave-diagram" viewBox="0 0 360 220" role="img" aria-label="Together"></svg>
+        </div>
       </section>
     </div>
     <footer><a href="https://ichabod-crane.net">Made by Ichabod Crane</a></footer>
