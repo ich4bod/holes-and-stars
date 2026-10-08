@@ -15,14 +15,45 @@ const undoButton = $('#mask-undo');
 const redoButton = $('#mask-redo');
 const past = [];
 const future = [];
+let keptMask = null;
+const keepButton = $('#mask-keep');
+const returnButton = $('#mask-return');
+const forgetButton = $('#mask-forget');
+const keptInfo = $('#mask-kept-info');
 const copyPoints = points => points.map(point => ({ ...point }));
 const snapshot = () => ({ points: copyPoints(state.points), selected: state.selected });
 const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
   point.x === b[index].x && point.y === b[index].y);
 
+function canReturnKeptMask() {
+  return keptMask !== null && gesture === null
+    && (!sameMask(keptMask.points, state.points) || keptMask.selected !== state.selected);
+}
+
+function updateKeptMask() {
+  returnButton.disabled = !canReturnKeptMask();
+  forgetButton.disabled = keptMask === null;
+  keptInfo.textContent = keptMask === null
+    ? 'No mask kept.' : `Kept mask: ${keptMask.points.length} holes.`;
+}
+
+keepButton.addEventListener('click', () => {
+  keptMask = snapshot();
+  updateKeptMask();
+});
+returnButton.addEventListener('click', () => {
+  if (!canReturnKeptMask()) return;
+  commitMask(keptMask.points, keptMask.selected);
+});
+forgetButton.addEventListener('click', () => {
+  keptMask = null;
+  updateKeptMask();
+});
+
 function updateHistoryButtons() {
   undoButton.disabled = gesture !== null || past.length === 0;
   redoButton.disabled = gesture !== null || future.length === 0;
+  updateKeptMask();
 }
 
 function pushSnapshot(stack, saved) {
@@ -106,6 +137,7 @@ function renderSource() {
     $(`#hole-${axis}-value`).textContent = point[axis].toFixed(2);
   }
   $('#hole-count').textContent = `${state.points.length} of 8 holes`;
+  updateKeptMask();
 }
 
 function selectHole(index) {

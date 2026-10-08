@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=643-1">
-  <script type="module" src="/app.mjs?v=643-1"></script>
+  <link rel="stylesheet" href="/style.css?v=644-1">
+  <script type="module" src="/app.mjs?v=644-1"></script>
 </head>
 <body>
   <main>
@@ -57,6 +57,16 @@
             <button id="mask-expand" type="button">Widen the gaps</button>
           </div>
           <p id="mask-geometry-help">These changes keep the holes together as a shape, but change their gaps or direction. The bright stripes change with them.</p>
+        </details>
+        <details id="mask-memory">
+          <summary>Keep a mask for comparison</summary>
+          <div class="memory-buttons">
+            <button id="mask-keep" type="button">Keep this mask</button>
+            <button id="mask-return" type="button" disabled>Return to kept mask</button>
+            <button id="mask-forget" type="button" disabled>Forget kept mask</button>
+          </div>
+          <p id="mask-kept-info">No mask kept.</p>
+          <p id="mask-keep-help">Keep the openings, not the inspected spot. Returning changes the mask once; Undo brings your experiment back.</p>
         </details>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>
