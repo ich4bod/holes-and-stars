@@ -26,8 +26,10 @@ export function field(points, u, v, options = {}) {
   let re = 0;
   let im = 0;
   const amplitude = envelope(u, v, options);
-  for (const point of points) {
-    const phase = -2 * Math.PI * (u * point.x + v * point.y);
+  for (let index = 0; index < points.length; index++) {
+    const point = points[index];
+    const phase = -2 * Math.PI * (u * point.x + v * point.y)
+      + (options.phaseMode === 'alternate' ? Math.PI * index : 0);
     const wave = { re: amplitude * Math.cos(phase), im: amplitude * Math.sin(phase) };
     waves.push(wave);
     re += wave.re;
@@ -41,8 +43,10 @@ export function intensity(points, u, v, options = {}) {
   let re = 0;
   let im = 0;
   const amplitude = envelope(u, v, options);
-  for (const point of points) {
-    const phase = -2 * Math.PI * (u * point.x + v * point.y);
+  for (let index = 0; index < points.length; index++) {
+    const point = points[index];
+    const phase = -2 * Math.PI * (u * point.x + v * point.y)
+      + (options.phaseMode === 'alternate' ? Math.PI * index : 0);
     re += amplitude * Math.cos(phase);
     im += amplitude * Math.sin(phase);
   }

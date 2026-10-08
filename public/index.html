@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=653-1">
-  <script type="module" src="/app.mjs?v=653-1"></script>
+  <link rel="stylesheet" href="/style.css?v=654-1">
+  <script type="module" src="/app.mjs?v=654-1"></script>
 </head>
 <body>
   <main>
@@ -80,6 +80,17 @@
             </select>
           </div>
           <p id="opening-envelope-help">The centers keep their gaps. Identical rectangular source patches add a broad envelope around the interference. The origin keeps the same normalized brightness; this is not a measurement of transmitted light. Overlapping patches add their fields, not a merged cutout.</p>
+        </details>
+        <details id="illumination-controls">
+          <summary>Illuminate the openings differently</summary>
+          <div class="illumination-controls">
+            <label for="illumination-phase">Arrival phase</label>
+            <select id="illumination-phase" aria-describedby="illumination-phase-help">
+              <option value="equal">All in phase</option>
+              <option value="alternate">Alternate opposite phases</option>
+            </select>
+          </div>
+          <p id="illumination-phase-help">The openings have not moved. Every second source starts half a turn behind its neighbor. A center that was bright can now cancel.</p>
         </details>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>

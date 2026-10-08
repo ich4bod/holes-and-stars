@@ -1,4 +1,4 @@
-import { PRESETS, raster, field } from './model.mjs?v=653-1';
+import { PRESETS, raster, field } from './model.mjs?v=654-1';
 
 const $ = selector => document.querySelector(selector);
 const mask = $('#mask');
@@ -10,6 +10,7 @@ const state = {
   selected: 0,
   probe: { u: 0, v: 0 },
   opening: { shape: 'point', width: 0, height: 0 },
+  phaseMode: 'equal',
 };
 const svgNS = 'http://www.w3.org/2000/svg';
 const undoButton = $('#mask-undo');
@@ -153,17 +154,18 @@ function renderProbe() {
     $(`#probe-${axis}`).value = state.probe[axis];
     $(`#probe-${axis}-value`).textContent = state.probe[axis].toFixed(2);
   }
-  const sum = field(state.points, state.probe.u, state.probe.v, state.opening);
+  const options = { ...state.opening, phaseMode: state.phaseMode };
+  const sum = field(state.points, state.probe.u, state.probe.v, options);
   $('#brightness').textContent = `Brightness: ${Math.round(100 * sum.intensity)}%`;
   $('#selected-wave-label').textContent = `Hole ${state.selected + 1} arrives on the highlighted arrow.`;
   drawWaves(sum);
-  drawSlice(sum);
+  drawSlice(sum, options);
 }
 
-function drawSlice(sum) {
+function drawSlice(sum, options) {
   const samples = Array.from({ length: 241 }, (_, i) => {
     const u = -6 + i * .05;
-    const intensity = field(state.points, u, state.probe.v, state.opening).intensity;
+    const intensity = field(state.points, u, state.probe.v, options).intensity;
     return `${10 + 380 * i / 240},${150 - 140 * intensity}`;
   });
   $('#slice-line').setAttribute('points', samples.join(' '));
@@ -177,6 +179,12 @@ $('#opening-shape').addEventListener('change', event => {
   };
   const [width, height] = shapes[event.target.value];
   state.opening = { shape: event.target.value, width, height };
+  scheduleProbe();
+  scheduleSky();
+});
+
+$('#illumination-phase').addEventListener('change', event => {
+  state.phaseMode = event.target.value;
   scheduleProbe();
   scheduleSky();
 });
@@ -308,7 +316,9 @@ function drawSky() {
   // A hidden or collapsed scene is redrawn when ResizeObserver sees it again.
   const bounds = sky.getBoundingClientRect();
   if (bounds.width === 0 || bounds.height === 0) return;
-  context.putImageData(new ImageData(raster(state.points, 256, state.opening), 256, 256), 0, 0);
+  context.putImageData(new ImageData(raster(state.points, 256, {
+    ...state.opening, phaseMode: state.phaseMode,
+  }), 256, 256), 0, 0);
 }
 
 function scheduleSky() {
