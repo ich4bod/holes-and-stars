@@ -1,0 +1,203 @@
+{
+  "slug": "holes-and-stars",
+  "controls": [
+    [
+      "hole-x",
+      "input"
+    ],
+    [
+      "hole-y",
+      "input"
+    ],
+    [
+      "remove-hole",
+      "button"
+    ],
+    [
+      "mask-undo",
+      "button"
+    ],
+    [
+      "mask-redo",
+      "button"
+    ],
+    [
+      "move-left",
+      "button"
+    ],
+    [
+      "move-right",
+      "button"
+    ],
+    [
+      "move-up",
+      "button"
+    ],
+    [
+      "move-down",
+      "button"
+    ],
+    [
+      "mask-turn-left",
+      "button"
+    ],
+    [
+      "mask-reflect",
+      "button"
+    ],
+    [
+      "mask-shrink",
+      "button"
+    ],
+    [
+      "mask-expand",
+      "button"
+    ],
+    [
+      "mask-center",
+      "button"
+    ],
+    [
+      "mask-keep",
+      "button"
+    ],
+    [
+      "mask-return",
+      "button"
+    ],
+    [
+      "mask-forget",
+      "button"
+    ],
+    [
+      "opening-shape",
+      "select"
+    ],
+    [
+      "illumination-phase",
+      "select"
+    ],
+    [
+      "illumination-holes",
+      "select"
+    ],
+    [
+      "probe-u",
+      "input"
+    ],
+    [
+      "probe-v",
+      "input"
+    ],
+    [
+      "slice-show-kept",
+      "input"
+    ]
+  ],
+  "copy": [
+    {
+      "selector": "#mask-instructions",
+      "text": "Tap empty space to add a hole. Choose a hole to move or remove it."
+    },
+    {
+      "selector": "#mask-history-help",
+      "text": "Undo returns one mask edit. Inspecting the sky does not change the mask."
+    },
+    {
+      "selector": "#mask-center-help",
+      "text": "Move the average opening to the middle. Gaps stay the same, so the brightness stays the same; the arriving arrows may turn. Undo returns the whole mask."
+    },
+    {
+      "selector": "#mask-geometry-help",
+      "text": "These changes keep the holes together as a shape, but change their gaps or direction. The bright stripes change with them."
+    },
+    {
+      "selector": "#mask-keep-help",
+      "text": "Keep the openings, not the inspected spot. Returning changes the mask once; Undo brings your experiment back."
+    },
+    {
+      "selector": "#opening-envelope-help",
+      "text": "The centers keep their gaps. Identical rectangular source patches add a broad envelope around the interference. The origin keeps the same normalized brightness; this is not a measurement of transmitted light. Overlapping patches add their fields, not a merged cutout."
+    },
+    {
+      "selector": "#illumination-phase-help",
+      "text": "The openings have not moved. Every second source starts half a turn behind its neighbor. A center that was bright can now cancel."
+    },
+    {
+      "selector": "#illumination-holes-help",
+      "text": "Close the other sources without removing them. One opening alone stays on the complete mask’s brightness scale. Choose another hole to see its part of the same sum."
+    },
+    {
+      "selector": "#slice-help",
+      "text": "This line crosses the inspected spot from left to right. It shows raw intensity; the sky brightens dim light for display."
+    },
+    {
+      "selector": "#slice-kept-help",
+      "text": "Blue is the current mask; dashed gold is the kept mask at this row. Both use the current illumination and the same intensity scale."
+    }
+  ],
+  "cases": [
+    {
+      "slug": "holes-and-stars",
+      "lane": 20,
+      "mode": "translate",
+      "title": "Holes & Stars — Keep translation and gap changes in different doors",
+      "depends": "692",
+      "goal": "A whole-mask translation can be inspected without confusing it with an edit to the gaps. Its explanation accompanies the four move buttons.",
+      "steps": "Wrap the intact .translation div in closed details #mask-translation in its existing source-column location. Preserve its translation-heading and both paragraphs/controls. Include692 #mask-origin-selected and its help in this translation door, moving from whichever geometry wrapper692 used if necessary: choosing an origin is also a whole-mask translation. Keep mask-geometry a separate sibling, never a child. Keep selected-hole x/y sliders, add/remove gesture, Undo/Redo and mask-history-help outside. No model/handler changes and no extra rendering on disclosure. Scoped CSS must preserve the original source column.",
+      "groups": [
+        {
+          "id": "mask-translation",
+          "summary": "Move the whole mask, keep the gaps",
+          "members": [
+            ".translation",
+            "#move-left",
+            "#move-right",
+            "#move-up",
+            "#move-down",
+            "#translation-heading",
+            "#mask-origin-selected",
+            "#mask-origin-help"
+          ]
+        }
+      ],
+      "outside": [
+        "#hole-x",
+        "#hole-y",
+        "#mask-geometry",
+        "#mask-undo",
+        "#mask-redo"
+      ],
+      "message": "whole-mask translation and gap changes use independent doors without changing the mask"
+    },
+    {
+      "slug": "holes-and-stars",
+      "lane": 20,
+      "mode": "arrayshelf",
+      "title": "Holes & Stars — Keep the four-opening experiments beside their explanation",
+      "depends": "684",
+      "goal": "Pair/Triangle/Ring stay quick starting shapes. The three four-opening comparisons form one optional experiment with its own words.",
+      "steps": "Inside existing .presets keep Pair/Triangle/Ring buttons outside. Add closed details #mask-array-experiments after them and move the three684 buttons data-preset row/broken/square plus #array-presets-help into it, preserving all labels/text. Ensure this details takes the full preset-group width rather than one narrow grid cell. Do not change or recreate preset arrays, count normalization, illumination or selection. Native summary only; no automatic preset selection on disclosure.",
+      "groups": [
+        {
+          "id": "mask-array-experiments",
+          "summary": "Compare four-opening arrangements",
+          "members": [
+            "button[data-preset=row]",
+            "button[data-preset=broken]",
+            "button[data-preset=square]",
+            "#array-presets-help"
+          ]
+        }
+      ],
+      "outside": [
+        "button[data-preset=pair]",
+        "button[data-preset=triangle]",
+        "button[data-preset=ring]",
+        "#mask",
+        "#mask-undo"
+      ],
+      "message": "four-opening experiments share a quiet shelf while the three starting shapes stay direct"
+    }
+  ]
+}
