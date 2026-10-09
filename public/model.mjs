@@ -12,6 +12,9 @@ export const PRESETS = Object.freeze({
     { x: -.3, y: -.5196152422706631 },
     { x: .3, y: -.5196152422706631 },
   ]),
+  row: freezePoints([{ x: -.6, y: 0 }, { x: -.2, y: 0 }, { x: .2, y: 0 }, { x: .6, y: 0 }]),
+  broken: freezePoints([{ x: -.6, y: 0 }, { x: -.2, y: 0 }, { x: .2, y: 0 }, { x: .8, y: 0 }]),
+  square: freezePoints([{ x: -.4, y: -.4 }, { x: .4, y: -.4 }, { x: .4, y: .4 }, { x: -.4, y: .4 }]),
 });
 
 function normalizedIntensity(re, im, count) {

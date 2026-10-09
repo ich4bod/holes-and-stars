@@ -27,8 +27,10 @@ button { font: inherit; font-size: 14px; color: #eef4ff; background: var(--panel
 button:hover { border-color: var(--muted); }
 button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold); background: var(--panel); }
 :focus-visible { outline: 3px solid var(--selected); outline-offset: 3px; }
-.presets { display: flex; gap: 8px; margin-bottom: 12px; }
-.presets button { flex: 1; }
+.presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 0; }
+.presets button { flex: 1 1 120px; }
+.presets button:focus-visible { outline-color: var(--gold); }
+#array-presets-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
 #mask { display: block; width: 100%; aspect-ratio: 1; background: var(--panel); outline: 1px solid var(--line); border-radius: 2px; touch-action: none; cursor: crosshair; user-select: none; }
 .hole { cursor: grab; }
 .hole:active { cursor: grabbing; }
