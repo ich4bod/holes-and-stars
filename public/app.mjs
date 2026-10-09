@@ -1,4 +1,4 @@
-import { PRESETS, raster, field } from './model.mjs?v=692-1';
+import { PRESETS, raster, field } from './model.mjs?v=706-1';
 
 const $ = selector => document.querySelector(selector);
 const mask = $('#mask');

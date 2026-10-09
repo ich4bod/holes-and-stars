@@ -36,7 +36,8 @@ export function field(points, u, v, options = {}) {
       continue;
     }
     const phase = -2 * Math.PI * (u * point.x + v * point.y)
-      + (options.phaseMode === 'alternate' ? Math.PI * index : 0);
+      + (options.phaseMode === 'alternate' ? Math.PI * index
+        : options.phaseMode === 'quarter' ? Math.PI * index / 2 : 0);
     const wave = { re: amplitude * Math.cos(phase), im: amplitude * Math.sin(phase) };
     waves.push(wave);
     re += wave.re;
@@ -54,7 +55,8 @@ export function intensity(points, u, v, options = {}) {
     const point = points[index];
     if (options.onlyIndex !== null && options.onlyIndex !== undefined && index !== options.onlyIndex) continue;
     const phase = -2 * Math.PI * (u * point.x + v * point.y)
-      + (options.phaseMode === 'alternate' ? Math.PI * index : 0);
+      + (options.phaseMode === 'alternate' ? Math.PI * index
+        : options.phaseMode === 'quarter' ? Math.PI * index / 2 : 0);
     re += amplitude * Math.cos(phase);
     im += amplitude * Math.sin(phase);
   }

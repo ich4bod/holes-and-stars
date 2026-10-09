@@ -96,6 +96,7 @@
             <select id="illumination-phase" aria-describedby="illumination-phase-help">
               <option value="equal">All in phase</option>
               <option value="alternate">Alternate opposite phases</option>
+              <option value="quarter">Quarter-turn leads</option>
             </select>
           </div>
           <div class="illumination-controls">
@@ -105,7 +106,7 @@
               <option value="chosen">Chosen opening only</option>
             </select>
           </div>
-          <p id="illumination-phase-help">The openings have not moved. Every second source starts half a turn behind its neighbor. A center that was bright can now cancel.</p>
+          <p id="illumination-phase-help">The openings have not moved. Opposite phases put every second source half a turn behind its neighbor. Quarter-turn leads advance each source by a quarter turn in mask order. Change the start of the waves, not their color.</p>
           <p id="illumination-holes-help">Close the other sources without removing them. One opening alone stays on the complete mask’s brightness scale. Choose another hole to see its part of the same sum.</p>
         </details>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
