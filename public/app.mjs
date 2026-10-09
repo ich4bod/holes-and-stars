@@ -25,6 +25,8 @@ const forgetButton = $('#mask-forget');
 const keptInfo = $('#mask-kept-info');
 const showKeptSlice = $('#slice-show-kept');
 const keptSliceLine = $('#slice-kept-line');
+const sliceAxis = $('#slice-axis');
+let selectedSliceAxis = 'row';
 const copyPoints = points => points.map(point => ({ ...point }));
 const snapshot = () => ({ points: copyPoints(state.points), selected: state.selected });
 const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
@@ -179,21 +181,24 @@ function renderProbe() {
 }
 
 function drawSlice(sum, options) {
-  const samples = Array.from({ length: 241 }, (_, i) => {
-    const u = -6 + i * .05;
-    const intensity = field(state.points, u, state.probe.v, options).intensity;
+  const sample = i => {
+    const coordinate = -6 + i * .05;
+    return selectedSliceAxis === 'row'
+      ? { u: coordinate, v: state.probe.v }
+      : { u: state.probe.u, v: coordinate };
+  };
+  const draw = points => Array.from({ length: 241 }, (_, i) => {
+    const { u, v } = sample(i);
+    const intensity = field(points, u, v, options).intensity;
     return `${10 + 380 * i / 240},${150 - 140 * intensity}`;
   });
-  $('#slice-line').setAttribute('points', samples.join(' '));
-  const keptSamples = keptMask === null ? [] : Array.from({ length: 241 }, (_, i) => {
-    const u = -6 + i * .05;
-    const intensity = field(keptMask.points, u, state.probe.v, options).intensity;
-    return `${10 + 380 * i / 240},${150 - 140 * intensity}`;
-  });
-  keptSliceLine.setAttribute('points', keptSamples.join(' '));
+  $('#slice-line').setAttribute('points', draw(state.points).join(' '));
+  keptSliceLine.setAttribute('points', keptMask === null ? '' : draw(keptMask.points).join(' '));
   keptSliceLine.toggleAttribute('hidden', keptMask === null || !showKeptSlice.checked);
-  $('#slice-probe').setAttribute('cx', 10 + (state.probe.u + 6) * 380 / 12);
+  const horizontal = selectedSliceAxis === 'row' ? state.probe.u : state.probe.v;
+  $('#slice-probe').setAttribute('cx', 10 + (horizontal + 6) * 380 / 12);
   $('#slice-probe').setAttribute('cy', 150 - 140 * sum.intensity);
+  $('#slice-direction').textContent = selectedSliceAxis === 'row' ? 'Left to right' : 'Bottom to top';
 }
 
 $('#opening-shape').addEventListener('change', event => {
@@ -216,6 +221,11 @@ $('#illumination-holes').addEventListener('change', event => {
   state.illuminationMode = event.target.value;
   scheduleProbe();
   scheduleSky();
+});
+
+sliceAxis.addEventListener('change', event => {
+  selectedSliceAxis = event.target.value;
+  scheduleProbe();
 });
 
 $('#screen-slice').addEventListener('toggle', () => {

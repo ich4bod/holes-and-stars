@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=657-1">
-  <script type="module" src="/app.mjs?v=657-1"></script>
+  <link rel="stylesheet" href="/style.css?v=683-1">
+  <script type="module" src="/app.mjs?v=683-1"></script>
 </head>
 <body>
   <main>
@@ -121,8 +121,15 @@
           <svg id="wave-diagram" viewBox="0 0 360 220" role="img" aria-label="Together"></svg>
           <p id="selected-wave-label">Hole 1 arrives on the highlighted arrow.</p>
           <details id="screen-slice">
-            <summary id="slice-summary">Brightness across this row</summary>
-            <p id="slice-help">This line crosses the inspected spot from left to right. It shows raw intensity; the sky brightens dim light for display.</p>
+            <summary id="slice-summary">Brightness through this spot</summary>
+            <p id="slice-help">The slice crosses the inspected spot in the chosen direction. It shows raw intensity; the sky brightens dim light for display.</p>
+            <div class="slice-axis-controls">
+              <label for="slice-axis">Direction through the spot</label>
+              <select id="slice-axis">
+                <option value="row" selected>Left to right</option>
+                <option value="column">Bottom to top</option>
+              </select>
+            </div>
             <label class="slice-kept-toggle"><input id="slice-show-kept" type="checkbox" disabled>Show the kept mask on this row</label>
             <p id="slice-kept-help">Blue is the current mask; dashed gold is the kept mask at this row. Both use the current illumination and the same intensity scale.</p>
             <svg id="slice-plot" viewBox="0 0 400 160" role="img" aria-labelledby="slice-summary" aria-describedby="slice-help">
@@ -134,7 +141,7 @@
               <text x="0" y="155">0%</text>
               <text x="0" y="10">100%</text>
             </svg>
-            <p>Left to right</p>
+            <p id="slice-direction">Left to right</p>
           </details>
       </div>
     </div>
