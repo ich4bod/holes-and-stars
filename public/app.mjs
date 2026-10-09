@@ -69,6 +69,7 @@ function updateHistoryButtons() {
   undoButton.disabled = gesture !== null || past.length === 0;
   redoButton.disabled = gesture !== null || future.length === 0;
   updateKeptMask();
+  updateCenterButton();
 }
 
 function pushSnapshot(stack, saved) {
@@ -153,6 +154,7 @@ function renderSource() {
   }
   $('#hole-count').textContent = `${state.points.length} of 8 holes`;
   updateKeptMask();
+  updateCenterButton();
 }
 
 function selectHole(index) {
@@ -425,6 +427,32 @@ for (const [id, transform] of [
   // Keep rejected actions available: the same candidate guard reports why.
   $(`#${id}`).addEventListener('click', () => changeMask(transform));
 }
+
+function centeredMaskCandidate() {
+  const count = state.points.length;
+  const cx = state.points.reduce((sum, point) => sum + point.x, 0) / count;
+  const cy = state.points.reduce((sum, point) => sum + point.y, 0) / count;
+  return state.points.map(point => ({
+    x: roundCoordinate(point.x - cx),
+    y: roundCoordinate(point.y - cy),
+  }));
+}
+
+function updateCenterButton() {
+  const candidate = centeredMaskCandidate();
+  const rejection = maskCandidateMessage(candidate);
+  const unchanged = candidate.every((point, index) =>
+    point.x === state.points[index].x && point.y === state.points[index].y);
+  $('#mask-center').disabled = gesture !== null || Boolean(rejection) || unchanged;
+}
+
+$('#mask-center').addEventListener('click', () => {
+  const candidate = centeredMaskCandidate();
+  if (gesture !== null || maskCandidateMessage(candidate)
+      || candidate.every((point, index) =>
+        point.x === state.points[index].x && point.y === state.points[index].y)) return;
+  commitMask(candidate, state.selected);
+});
 
 function validPoint(point, skip = -1) {
   if (!Number.isFinite(point.x) || !Number.isFinite(point.y)

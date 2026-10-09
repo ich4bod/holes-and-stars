@@ -54,6 +54,7 @@ input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px
 #mask-geometry summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
 #mask-geometry .geometry-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 #mask-geometry .geometry-buttons button { flex: 1 1 140px; }
+#mask-center-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
 #mask-geometry-help { color: var(--muted); margin: 12px 0; }
 #mask-geometry [hidden] { display: none !important; }
 #mask-memory { margin-top: 20px; padding: 0 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 14px; }
