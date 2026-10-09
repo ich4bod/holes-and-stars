@@ -1,0 +1,81 @@
+{
+  "slug": "holes-and-stars",
+  "cases": {
+    "presets": {
+      "kind": "holes",
+      "message": "four-opening studies separate long gaps from turned arrangements in one Undo",
+      "rows": [
+        [
+          "ladder",
+          "Two short rows",
+          [
+            {
+              "x": -0.6,
+              "y": -0.2
+            },
+            {
+              "x": 0.6,
+              "y": -0.2
+            },
+            {
+              "x": -0.6,
+              "y": 0.2
+            },
+            {
+              "x": 0.6,
+              "y": 0.2
+            }
+          ]
+        ],
+        [
+          "diamond",
+          "Turn the square",
+          [
+            {
+              "x": 0,
+              "y": -0.6
+            },
+            {
+              "x": 0.6,
+              "y": 0
+            },
+            {
+              "x": 0,
+              "y": 0.6
+            },
+            {
+              "x": -0.6,
+              "y": 0
+            }
+          ]
+        ],
+        [
+          "narrow",
+          "Bring the columns close",
+          [
+            {
+              "x": -0.2,
+              "y": -0.6
+            },
+            {
+              "x": 0.2,
+              "y": -0.6
+            },
+            {
+              "x": 0.2,
+              "y": 0.6
+            },
+            {
+              "x": -0.2,
+              "y": 0.6
+            }
+          ]
+        ]
+      ]
+    },
+    "opposite": {
+      "kind": "opposite",
+      "message": "an opposite sky spot moves both probe axes without editing the mask or its Undo"
+    }
+  }
+}
