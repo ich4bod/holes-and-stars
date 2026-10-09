@@ -23,6 +23,8 @@ const keepButton = $('#mask-keep');
 const returnButton = $('#mask-return');
 const forgetButton = $('#mask-forget');
 const keptInfo = $('#mask-kept-info');
+const showKeptSlice = $('#slice-show-kept');
+const keptSliceLine = $('#slice-kept-line');
 const copyPoints = points => points.map(point => ({ ...point }));
 const snapshot = () => ({ points: copyPoints(state.points), selected: state.selected });
 const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
@@ -43,11 +45,15 @@ function updateKeptMask() {
   forgetButton.disabled = keptMask === null;
   keptInfo.textContent = keptMask === null
     ? 'No mask kept.' : `Kept mask: ${keptMask.points.length} holes.`;
+  showKeptSlice.disabled = keptMask === null;
+  if (keptMask === null) showKeptSlice.checked = false;
+  keptSliceLine.toggleAttribute('hidden', keptMask === null || !showKeptSlice.checked);
 }
 
 keepButton.addEventListener('click', () => {
   keptMask = snapshot();
   updateKeptMask();
+  scheduleProbe();
 });
 returnButton.addEventListener('click', () => {
   if (!canReturnKeptMask()) return;
@@ -56,6 +62,7 @@ returnButton.addEventListener('click', () => {
 forgetButton.addEventListener('click', () => {
   keptMask = null;
   updateKeptMask();
+  scheduleProbe();
 });
 
 function updateHistoryButtons() {
@@ -176,6 +183,13 @@ function drawSlice(sum, options) {
     return `${10 + 380 * i / 240},${150 - 140 * intensity}`;
   });
   $('#slice-line').setAttribute('points', samples.join(' '));
+  const keptSamples = keptMask === null ? [] : Array.from({ length: 241 }, (_, i) => {
+    const u = -6 + i * .05;
+    const intensity = field(keptMask.points, u, state.probe.v, options).intensity;
+    return `${10 + 380 * i / 240},${150 - 140 * intensity}`;
+  });
+  keptSliceLine.setAttribute('points', keptSamples.join(' '));
+  keptSliceLine.toggleAttribute('hidden', keptMask === null || !showKeptSlice.checked);
   $('#slice-probe').setAttribute('cx', 10 + (state.probe.u + 6) * 380 / 12);
   $('#slice-probe').setAttribute('cy', 150 - 140 * sum.intensity);
 }
@@ -204,6 +218,9 @@ $('#illumination-holes').addEventListener('change', event => {
 
 $('#screen-slice').addEventListener('toggle', () => {
   if ($('#screen-slice').open) scheduleProbe();
+});
+showKeptSlice.addEventListener('change', () => {
+  keptSliceLine.toggleAttribute('hidden', keptMask === null || !showKeptSlice.checked);
 });
 
 function drawWaves(sum) {
