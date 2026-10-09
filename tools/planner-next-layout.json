@@ -1,0 +1,131 @@
+{
+  "slug": "holes-and-stars",
+  "controls": [
+    [
+      "hole-x",
+      "input"
+    ],
+    [
+      "hole-y",
+      "input"
+    ],
+    [
+      "remove-hole",
+      "button"
+    ],
+    [
+      "mask-undo",
+      "button"
+    ],
+    [
+      "mask-redo",
+      "button"
+    ],
+    [
+      "move-left",
+      "button"
+    ],
+    [
+      "move-right",
+      "button"
+    ],
+    [
+      "move-up",
+      "button"
+    ],
+    [
+      "move-down",
+      "button"
+    ],
+    [
+      "mask-turn-left",
+      "button"
+    ],
+    [
+      "mask-reflect",
+      "button"
+    ],
+    [
+      "mask-shrink",
+      "button"
+    ],
+    [
+      "mask-expand",
+      "button"
+    ],
+    [
+      "mask-center",
+      "button"
+    ],
+    [
+      "mask-keep",
+      "button"
+    ],
+    [
+      "mask-return",
+      "button"
+    ],
+    [
+      "mask-forget",
+      "button"
+    ],
+    [
+      "opening-shape",
+      "select"
+    ],
+    [
+      "illumination-phase",
+      "select"
+    ],
+    [
+      "illumination-holes",
+      "select"
+    ],
+    [
+      "probe-u",
+      "input"
+    ],
+    [
+      "probe-v",
+      "input"
+    ],
+    [
+      "slice-axis",
+      "select"
+    ],
+    [
+      "slice-show-kept",
+      "input"
+    ]
+  ],
+  "cases": [
+    {
+      "slug": "holes-and-stars",
+      "lane": 20,
+      "name": "Holes & Stars",
+      "mode": "skyfirst",
+      "title": "Holes & Stars \u2014 Show the far-away sky before the mask shelf on phones",
+      "depends": "nothing",
+      "message": "the phone sky leads the mask while desktop keeps its two-column instrument",
+      "groups": [],
+      "geometry": "sky-first",
+      "orders": [
+        [
+          ".screen",
+          ".source"
+        ]
+      ],
+      "copySelectors": [
+        "#mask-instructions"
+      ],
+      "steps": "Inside .instrument move intact section.screen before section.source in DOM. Keep .inspection after source; preserve source controls and all canvases once. Retain desktop CSS placement (source column1 spanning two rows; screen column2 row1; inspection column2 row2). In the existing <=700px media rule explicitly put screen row1, source row2 and inspection row3 in the single column; do not use visual ordering that disagrees with DOM. Do not change canvas bitmap size, aspect ratio, draw calls, gesture targets or interpolation.",
+      "palette": "background #080e19, panel #101c2a, ink #eef4ff, line #30435a, muted #afbed1, gold #ffd38a; existing system fonts",
+      "copy": [
+        [
+          "#mask-instructions",
+          "Tap empty space to add a hole. Choose a hole to move or remove it."
+        ]
+      ]
+    }
+  ]
+}
