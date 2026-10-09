@@ -1,4 +1,4 @@
-import { PRESETS, raster, field } from './model.mjs?v=654-1';
+import { PRESETS, raster, field } from './model.mjs?v=655-1';
 
 const $ = selector => document.querySelector(selector);
 const mask = $('#mask');
@@ -11,6 +11,7 @@ const state = {
   probe: { u: 0, v: 0 },
   opening: { shape: 'point', width: 0, height: 0 },
   phaseMode: 'equal',
+  illuminationMode: 'all',
 };
 const svgNS = 'http://www.w3.org/2000/svg';
 const undoButton = $('#mask-undo');
@@ -26,6 +27,11 @@ const copyPoints = points => points.map(point => ({ ...point }));
 const snapshot = () => ({ points: copyPoints(state.points), selected: state.selected });
 const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
   point.x === b[index].x && point.y === b[index].y);
+const modelOptions = () => ({
+  ...state.opening,
+  phaseMode: state.phaseMode,
+  onlyIndex: state.illuminationMode === 'chosen' ? state.selected : null,
+});
 
 function canReturnKeptMask() {
   return keptMask !== null && gesture === null
@@ -147,6 +153,7 @@ function selectHole(index) {
   status.textContent = '';
   renderSource();
   scheduleProbe();
+  if (state.illuminationMode === 'chosen') scheduleSky();
 }
 
 function renderProbe() {
@@ -154,7 +161,7 @@ function renderProbe() {
     $(`#probe-${axis}`).value = state.probe[axis];
     $(`#probe-${axis}-value`).textContent = state.probe[axis].toFixed(2);
   }
-  const options = { ...state.opening, phaseMode: state.phaseMode };
+  const options = modelOptions();
   const sum = field(state.points, state.probe.u, state.probe.v, options);
   $('#brightness').textContent = `Brightness: ${Math.round(100 * sum.intensity)}%`;
   $('#selected-wave-label').textContent = `Hole ${state.selected + 1} arrives on the highlighted arrow.`;
@@ -185,6 +192,12 @@ $('#opening-shape').addEventListener('change', event => {
 
 $('#illumination-phase').addEventListener('change', event => {
   state.phaseMode = event.target.value;
+  scheduleProbe();
+  scheduleSky();
+});
+
+$('#illumination-holes').addEventListener('change', event => {
+  state.illuminationMode = event.target.value;
   scheduleProbe();
   scheduleSky();
 });
@@ -316,9 +329,7 @@ function drawSky() {
   // A hidden or collapsed scene is redrawn when ResizeObserver sees it again.
   const bounds = sky.getBoundingClientRect();
   if (bounds.width === 0 || bounds.height === 0) return;
-  context.putImageData(new ImageData(raster(state.points, 256, {
-    ...state.opening, phaseMode: state.phaseMode,
-  }), 256, 256), 0, 0);
+  context.putImageData(new ImageData(raster(state.points, 256, modelOptions()), 256, 256), 0, 0);
 }
 
 function scheduleSky() {

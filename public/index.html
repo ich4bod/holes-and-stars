@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=654-1">
-  <script type="module" src="/app.mjs?v=654-1"></script>
+  <link rel="stylesheet" href="/style.css?v=655-1">
+  <script type="module" src="/app.mjs?v=655-1"></script>
 </head>
 <body>
   <main>
@@ -90,7 +90,15 @@
               <option value="alternate">Alternate opposite phases</option>
             </select>
           </div>
+          <div class="illumination-controls">
+            <label for="illumination-holes">Sources to light</label>
+            <select id="illumination-holes" aria-describedby="illumination-holes-help">
+              <option value="all">Every opening</option>
+              <option value="chosen">Chosen opening only</option>
+            </select>
+          </div>
           <p id="illumination-phase-help">The openings have not moved. Every second source starts half a turn behind its neighbor. A center that was bright can now cancel.</p>
+          <p id="illumination-holes-help">Close the other sources without removing them. One opening alone stays on the complete mask’s brightness scale. Choose another hole to see its part of the same sum.</p>
         </details>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>
