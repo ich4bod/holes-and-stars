@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
   <link rel="stylesheet" href="/style.css?v=684-1">
-  <script type="module" src="/app.mjs?v=684-1"></script>
+  <script type="module" src="/app.mjs?v=692-1"></script>
 </head>
 <body>
   <main>
@@ -57,10 +57,12 @@
           <div class="geometry-buttons">
             <button id="mask-turn-left" type="button">Turn the mask left</button>
             <button id="mask-reflect" type="button">Reflect the mask</button>
+            <button id="mask-origin-selected" type="button">Put this opening at zero</button>
             <button id="mask-shrink" type="button">Shrink the gaps</button>
             <button id="mask-expand" type="button">Widen the gaps</button>
             <button id="mask-center" type="button" disabled>Center the openings</button>
           </div>
+          <p id="mask-origin-help">Move every opening together until the chosen one is at zero. The gaps and brightness stay the same. A mask that would leave the square cannot move.</p>
           <p id="mask-center-help">Move the average opening to the middle. Gaps stay the same, so the brightness stays the same; the arriving arrows may turn. Undo returns the whole mask.</p>
           <p id="mask-geometry-help">These changes keep the holes together as a shape, but change their gaps or direction. The bright stripes change with them.</p>
         </details>

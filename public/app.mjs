@@ -1,4 +1,4 @@
-import { PRESETS, raster, field } from './model.mjs?v=684-1';
+import { PRESETS, raster, field } from './model.mjs?v=692-1';
 
 const $ = selector => document.querySelector(selector);
 const mask = $('#mask');
@@ -72,6 +72,7 @@ function updateHistoryButtons() {
   redoButton.disabled = gesture !== null || future.length === 0;
   updateKeptMask();
   updateCenterButton();
+  updateOriginButton();
 }
 
 function pushSnapshot(stack, saved) {
@@ -157,6 +158,7 @@ function renderSource() {
   $('#hole-count').textContent = `${state.points.length} of 8 holes`;
   updateKeptMask();
   updateCenterButton();
+  updateOriginButton();
 }
 
 function selectHole(index) {
@@ -437,6 +439,36 @@ for (const [id, transform] of [
   // Keep rejected actions available: the same candidate guard reports why.
   $(`#${id}`).addEventListener('click', () => changeMask(transform));
 }
+
+function selectedOriginCandidate() {
+  const selected = state.points[state.selected];
+  const dx = -selected.x;
+  const dy = -selected.y;
+  return state.points.map(point => ({
+    x: dx === 0 ? point.x : roundCoordinate(point.x + dx),
+    y: dy === 0 ? point.y : roundCoordinate(point.y + dy),
+  }));
+}
+
+function updateOriginButton() {
+  const candidate = selectedOriginCandidate();
+  const rejection = maskCandidateMessage(candidate);
+  const unchanged = candidate.every((point, index) =>
+    point.x === state.points[index].x && point.y === state.points[index].y);
+  $('#mask-origin-selected').disabled = gesture !== null || Boolean(rejection) || unchanged;
+}
+
+$('#mask-origin-selected').addEventListener('click', () => {
+  const candidate = selectedOriginCandidate();
+  const rejection = maskCandidateMessage(candidate);
+  const unchanged = candidate.every((point, index) =>
+    point.x === state.points[index].x && point.y === state.points[index].y);
+  if (gesture !== null || rejection || unchanged) {
+    status.textContent = rejection;
+    return;
+  }
+  commitMask(candidate, state.selected);
+});
 
 function centeredMaskCandidate() {
   const count = state.points.length;
