@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=738-1">
-  <script type="module" src="/app.mjs?v=707-1"></script>
+  <link rel="stylesheet" href="/style.css?v=750-1">
+  <script type="module" src="/app.mjs?v=750-1"></script>
 </head>
 <body>
   <main>
@@ -32,8 +32,12 @@
               <button type="button" data-preset="row">Four in a row</button>
               <button type="button" data-preset="broken">Break one gap</button>
               <button type="button" data-preset="square">Four in a square</button>
+              <button type="button" data-preset="ladder">Two short rows</button>
+              <button type="button" data-preset="diamond">Four in a diamond</button>
+              <button type="button" data-preset="narrow">Bring the columns close</button>
             </div>
             <p id="array-presets-help">Three masks, four openings each. Equal gaps, one stretched gap, or two directions: the sky follows the arrangement.</p>
+            <p id="array-shape-studies-help">Four openings each: stretch the rows, turn the arrangement, or bring two columns closer. The brightness still uses the same four-source scale.</p>
           </details>
         </div>
         <svg id="mask" viewBox="-1 -1 2 2" role="img" aria-label="The mask" aria-describedby="mask-instructions"></svg>

@@ -15,6 +15,24 @@ export const PRESETS = Object.freeze({
   row: freezePoints([{ x: -.6, y: 0 }, { x: -.2, y: 0 }, { x: .2, y: 0 }, { x: .6, y: 0 }]),
   broken: freezePoints([{ x: -.6, y: 0 }, { x: -.2, y: 0 }, { x: .2, y: 0 }, { x: .8, y: 0 }]),
   square: freezePoints([{ x: -.4, y: -.4 }, { x: .4, y: -.4 }, { x: .4, y: .4 }, { x: -.4, y: .4 }]),
+  ladder: freezePoints([
+    { x: -.6, y: -.2 },
+    { x: .6, y: -.2 },
+    { x: -.6, y: .2 },
+    { x: .6, y: .2 },
+  ]),
+  diamond: freezePoints([
+    { x: 0, y: -.6 },
+    { x: .6, y: 0 },
+    { x: 0, y: .6 },
+    { x: -.6, y: 0 },
+  ]),
+  narrow: freezePoints([
+    { x: -.2, y: -.6 },
+    { x: .2, y: -.6 },
+    { x: .2, y: .6 },
+    { x: -.2, y: .6 },
+  ]),
 });
 
 function normalizedIntensity(re, im, count) {

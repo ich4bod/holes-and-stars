@@ -47,6 +47,9 @@ button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold);
 #mask-array-experiments:not([open]) > :not(summary) { display: none !important; }
 #mask-array-experiments .array-experiment-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 #mask-array-experiments .array-experiment-buttons button { flex: 1 1 120px; }
+#mask-array-experiments .array-experiment-buttons [data-preset="ladder"],
+#mask-array-experiments .array-experiment-buttons [data-preset="diamond"],
+#mask-array-experiments .array-experiment-buttons [data-preset="narrow"] { min-height: 45px; font: 16px system-ui, sans-serif; }
 #array-presets-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
 #mask { display: block; width: 100%; aspect-ratio: 1; background: var(--panel); outline: 1px solid var(--line); border-radius: 2px; touch-action: none; cursor: crosshair; user-select: none; }
 .hole { cursor: grab; }
