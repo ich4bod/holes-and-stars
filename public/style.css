@@ -30,6 +30,23 @@ button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold);
 .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 0; }
 .presets button { flex: 1 1 120px; }
 .presets button:focus-visible { outline-color: var(--gold); }
+#mask-array-experiments {
+  flex: 1 1 100%;
+  min-width: 0;
+  padding: 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+#mask-array-experiments > summary {
+  min-height: 45px;
+  padding: 8px 0;
+  font: 16px system-ui, sans-serif;
+  cursor: pointer;
+}
+#mask-array-experiments:not([open]) > :not(summary) { display: none !important; }
+#mask-array-experiments .array-experiment-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+#mask-array-experiments .array-experiment-buttons button { flex: 1 1 120px; }
 #array-presets-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
 #mask { display: block; width: 100%; aspect-ratio: 1; background: var(--panel); outline: 1px solid var(--line); border-radius: 2px; touch-action: none; cursor: crosshair; user-select: none; }
 .hole { cursor: grab; }

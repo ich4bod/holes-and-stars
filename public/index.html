@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=725-1">
+  <link rel="stylesheet" href="/style.css?v=726-1">
   <script type="module" src="/app.mjs?v=707-1"></script>
 </head>
 <body>
@@ -22,11 +22,16 @@
           <button type="button" data-preset="pair">Pair</button>
           <button type="button" data-preset="triangle">Triangle</button>
           <button type="button" data-preset="ring">Ring</button>
-          <button type="button" data-preset="row">Four in a row</button>
-          <button type="button" data-preset="broken">Break one gap</button>
-          <button type="button" data-preset="square">Four in a square</button>
+          <details id="mask-array-experiments">
+            <summary>Compare four-opening arrangements</summary>
+            <div class="array-experiment-buttons">
+              <button type="button" data-preset="row">Four in a row</button>
+              <button type="button" data-preset="broken">Break one gap</button>
+              <button type="button" data-preset="square">Four in a square</button>
+            </div>
+            <p id="array-presets-help">Three masks, four openings each. Equal gaps, one stretched gap, or two directions: the sky follows the arrangement.</p>
+          </details>
         </div>
-        <p id="array-presets-help">Three masks, four openings each. Equal gaps, one stretched gap, or two directions: the sky follows the arrangement.</p>
         <svg id="mask" viewBox="-1 -1 2 2" role="img" aria-label="The mask" aria-describedby="mask-instructions"></svg>
         <p id="mask-instructions">Tap empty space to add a hole. Choose a hole to move or remove it.</p>
         <div id="hole-list" class="hole-list"></div>
