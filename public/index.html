@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=750-1">
-  <script type="module" src="/app.mjs?v=750-1"></script>
+  <link rel="stylesheet" href="/style.css?v=755-1">
+  <script type="module" src="/app.mjs?v=755-1"></script>
 </head>
 <body>
   <main>
@@ -144,6 +144,11 @@
             <label for="probe-v">Screen v <output id="probe-v-value">0.00</output></label>
             <input id="probe-v" type="range" min="-6" max="6" step=".05" value="0">
           </div>
+          <details id="probe-opposite-details">
+            <summary>Inspect the point across the center</summary>
+            <button id="probe-opposite" type="button" disabled>Inspect the opposite spot</button>
+            <p id="probe-opposite-help">Inspect the point across the center. Equal-phase masks have matching brightness there; source phases can break that symmetry. The openings stay put.</p>
+          </details>
           <output id="brightness">Brightness: 100%</output>
           <svg id="wave-diagram" viewBox="0 0 360 220" role="img" aria-label="Together"></svg>
           <p id="selected-wave-label">Hole 1 arrives on the highlighted arrow.</p>

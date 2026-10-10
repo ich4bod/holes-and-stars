@@ -72,6 +72,7 @@ forgetButton.addEventListener('click', () => {
 function updateHistoryButtons() {
   undoButton.disabled = gesture !== null || past.length === 0;
   redoButton.disabled = gesture !== null || future.length === 0;
+  updateOppositeButton();
   updateKeptMask();
   updateCenterButton();
   updateOriginButton();
@@ -171,7 +172,25 @@ function selectHole(index) {
   if (state.illuminationMode === 'chosen') scheduleSky();
 }
 
+function oppositeProbeCandidate() {
+  return { u: -state.probe.u || 0, v: -state.probe.v || 0 };
+}
+
+function updateOppositeButton() {
+  const candidate = oppositeProbeCandidate();
+  $('#probe-opposite').disabled = gesture !== null
+    || (candidate.u === state.probe.u && candidate.v === state.probe.v);
+}
+
+$('#probe-opposite').addEventListener('click', () => {
+  const candidate = oppositeProbeCandidate();
+  if (gesture !== null || (candidate.u === state.probe.u && candidate.v === state.probe.v)) return;
+  state.probe = candidate;
+  scheduleProbe();
+});
+
 function renderProbe() {
+  updateOppositeButton();
   for (const axis of ['u', 'v']) {
     $(`#probe-${axis}`).value = state.probe[axis];
     $(`#probe-${axis}-value`).textContent = state.probe[axis].toFixed(2);
