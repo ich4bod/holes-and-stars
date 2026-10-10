@@ -121,7 +121,7 @@
     },
     {
       "selector": "#illumination-phase-help",
-      "text": "The openings have not moved. Every second source starts half a turn behind its neighbor. A center that was bright can now cancel."
+      "text": "The openings have not moved. Opposite phases put every second source half a turn behind its neighbor. Quarter-turn leads advance each source by a quarter turn in mask order. Change the start of the waves, not their color."
     },
     {
       "selector": "#illumination-holes-help",
@@ -129,7 +129,7 @@
     },
     {
       "selector": "#slice-help",
-      "text": "This line crosses the inspected spot from left to right. It shows raw intensity; the sky brightens dim light for display."
+      "text": "The slice crosses the inspected spot in the chosen direction. It shows raw intensity; the sky brightens dim light for display."
     },
     {
       "selector": "#slice-kept-help",
