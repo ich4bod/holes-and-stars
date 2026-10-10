@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=726-1">
+  <link rel="stylesheet" href="/style.css?v=738-1">
   <script type="module" src="/app.mjs?v=707-1"></script>
 </head>
 <body>
@@ -16,6 +16,10 @@
       <p class="gesture">Drag a hole. The sky follows the gaps between them.</p>
     </header>
     <div class="instrument">
+      <section class="screen" aria-labelledby="sky-heading">
+        <div class="section-heading"><h2 id="sky-heading">Far away</h2></div>
+        <div class="sky-frame"><canvas id="sky" width="256" height="256" role="img" aria-label="Far away"></canvas></div>
+      </section>
       <section class="source" aria-labelledby="mask-heading">
         <div class="section-heading"><h2 id="mask-heading">The mask</h2><output id="hole-count">2 of 8 holes</output></div>
         <div class="presets" aria-label="The mask">
@@ -126,10 +130,6 @@
           <p id="illumination-holes-help">Close the other sources without removing them. One opening alone stays on the complete mask’s brightness scale. Choose another hole to see its part of the same sum.</p>
         </details>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
-      </section>
-      <section class="screen" aria-labelledby="sky-heading">
-        <div class="section-heading"><h2 id="sky-heading">Far away</h2></div>
-        <div class="sky-frame"><canvas id="sky" width="256" height="256" role="img" aria-label="Far away"></canvas></div>
       </section>
       <div class="inspection" aria-labelledby="inspection-heading">
           <h2 id="inspection-heading">Why this spot has this brightness</h2>
