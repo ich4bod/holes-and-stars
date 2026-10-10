@@ -1,0 +1,79 @@
+{
+  "mode": "crosses",
+  "lane": 20,
+  "title": "Holes & Stars \u2014 Compare two crossed rows with a missing-arm mask",
+  "message": "three masks let one absent opening disturb an otherwise symmetric arrangement",
+  "rows": [
+    [
+      "cross-five",
+      "A center and four arms",
+      [
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          -0.6
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          0.6,
+          0
+        ]
+      ]
+    ],
+    [
+      "cross-four",
+      "Four arms, no center",
+      [
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          -0.6
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          0.6,
+          0
+        ]
+      ]
+    ],
+    [
+      "cross-missing",
+      "One missing arm",
+      [
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          -0.6
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0.6,
+          0
+        ]
+      ]
+    ]
+  ],
+  "help": "Compare the same crossed arrangement with its center or one arm missing. This changes openings, not their width or the chosen sky spot. Undo brings the old mask back."
+}
