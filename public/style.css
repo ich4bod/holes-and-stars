@@ -77,8 +77,8 @@ input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px
 #illumination-controls summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
 #illumination-controls .illumination-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 #illumination-controls label { flex: 1 1 120px; }
-#illumination-phase, #illumination-holes { flex: 2 1 180px; min-width: 0; min-height: 44px; padding: 8px; color: #eef4ff; background: #101c2a; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
-#illumination-phase-help, #illumination-holes-help { color: var(--muted); margin: 12px 0; }
+#illumination-phase, #illumination-strength, #illumination-holes { flex: 2 1 180px; min-width: 0; min-height: 44px; padding: 8px; color: #eef4ff; background: #101c2a; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+#illumination-phase-help, #illumination-strength-help, #illumination-holes-help { color: var(--muted); margin: 12px 0; }
 #status { min-height: 3em; font-size: 14px; color: var(--gold); margin: 12px 0 0; }
 .sky-frame { width: 100%; aspect-ratio: 1; background: #080e19; outline: 1px solid var(--line); }
 #sky { display: block; width: 100%; height: 100%; image-rendering: auto; touch-action: none; cursor: crosshair; }

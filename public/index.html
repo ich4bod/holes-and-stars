@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=684-1">
-  <script type="module" src="/app.mjs?v=692-1"></script>
+  <link rel="stylesheet" href="/style.css?v=707-1">
+  <script type="module" src="/app.mjs?v=707-1"></script>
 </head>
 <body>
   <main>
@@ -99,6 +99,15 @@
               <option value="quarter">Quarter-turn leads</option>
             </select>
           </div>
+          <p id="illumination-phase-help">The openings have not moved. Opposite phases put every second source half a turn behind its neighbor. Quarter-turn leads advance each source by a quarter turn in mask order. Change the start of the waves, not their color.</p>
+          <div class="illumination-controls">
+            <label for="illumination-strength">Source amplitudes</label>
+            <select id="illumination-strength" aria-describedby="illumination-strength-help">
+              <option value="equal">All full strength</option>
+              <option value="alternate-half">Every second source at half amplitude</option>
+            </select>
+          </div>
+          <p id="illumination-strength-help">Half amplitude is not half brightness. Every second arriving arrow is shorter; the openings and normalization stay unchanged.</p>
           <div class="illumination-controls">
             <label for="illumination-holes">Sources to light</label>
             <select id="illumination-holes" aria-describedby="illumination-holes-help">
@@ -106,7 +115,6 @@
               <option value="chosen">Chosen opening only</option>
             </select>
           </div>
-          <p id="illumination-phase-help">The openings have not moved. Opposite phases put every second source half a turn behind its neighbor. Quarter-turn leads advance each source by a quarter turn in mask order. Change the start of the waves, not their color.</p>
           <p id="illumination-holes-help">Close the other sources without removing them. One opening alone stays on the complete mask’s brightness scale. Choose another hole to see its part of the same sum.</p>
         </details>
         <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>

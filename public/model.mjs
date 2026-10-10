@@ -23,6 +23,8 @@ function normalizedIntensity(re, im, count) {
 
 const sinc = value => value === 0 ? 1 : Math.sin(Math.PI * value) / (Math.PI * value);
 const envelope = (u, v, options) => sinc((options.width ?? 0) * u) * sinc((options.height ?? 0) * v);
+const sourceAmplitude = (index, amplitude, options) => amplitude
+  * (options.strengthMode === 'alternate-half' && index % 2 === 1 ? .5 : 1);
 
 export function field(points, u, v, options = {}) {
   const waves = [];
@@ -38,7 +40,8 @@ export function field(points, u, v, options = {}) {
     const phase = -2 * Math.PI * (u * point.x + v * point.y)
       + (options.phaseMode === 'alternate' ? Math.PI * index
         : options.phaseMode === 'quarter' ? Math.PI * index / 2 : 0);
-    const wave = { re: amplitude * Math.cos(phase), im: amplitude * Math.sin(phase) };
+    const source = sourceAmplitude(index, amplitude, options);
+    const wave = { re: source * Math.cos(phase), im: source * Math.sin(phase) };
     waves.push(wave);
     re += wave.re;
     im += wave.im;
@@ -57,8 +60,9 @@ export function intensity(points, u, v, options = {}) {
     const phase = -2 * Math.PI * (u * point.x + v * point.y)
       + (options.phaseMode === 'alternate' ? Math.PI * index
         : options.phaseMode === 'quarter' ? Math.PI * index / 2 : 0);
-    re += amplitude * Math.cos(phase);
-    im += amplitude * Math.sin(phase);
+    const source = sourceAmplitude(index, amplitude, options);
+    re += source * Math.cos(phase);
+    im += source * Math.sin(phase);
   }
   return normalizedIntensity(re, im, points.length);
 }

@@ -1,4 +1,4 @@
-import { PRESETS, raster, field } from './model.mjs?v=706-1';
+import { PRESETS, raster, field } from './model.mjs?v=707-1';
 
 const $ = selector => document.querySelector(selector);
 const mask = $('#mask');
@@ -11,6 +11,7 @@ const state = {
   probe: { u: 0, v: 0 },
   opening: { shape: 'point', width: 0, height: 0 },
   phaseMode: 'equal',
+  strengthMode: 'equal',
   illuminationMode: 'all',
 };
 const svgNS = 'http://www.w3.org/2000/svg';
@@ -34,6 +35,7 @@ const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
 const modelOptions = () => ({
   ...state.opening,
   phaseMode: state.phaseMode,
+  strengthMode: state.strengthMode,
   onlyIndex: state.illuminationMode === 'chosen' ? state.selected : null,
 });
 
@@ -215,6 +217,12 @@ $('#opening-shape').addEventListener('change', event => {
 
 $('#illumination-phase').addEventListener('change', event => {
   state.phaseMode = event.target.value;
+  scheduleProbe();
+  scheduleSky();
+});
+
+$('#illumination-strength').addEventListener('change', event => {
+  state.strengthMode = event.target.value;
   scheduleProbe();
   scheduleSky();
 });
