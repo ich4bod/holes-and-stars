@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=707-1">
+  <link rel="stylesheet" href="/style.css?v=725-1">
   <script type="module" src="/app.mjs?v=707-1"></script>
 </head>
 <body>
@@ -42,27 +42,30 @@
           <button id="mask-redo" type="button" disabled>Redo mask change</button>
         </div>
         <p id="mask-history-help">Undo returns one mask edit. Inspecting the sky does not change the mask.</p>
-        <div class="translation" aria-labelledby="translation-heading">
-          <h2 id="translation-heading">The sky doesn't move</h2>
-          <p>Move every hole by the same amount. Their gaps stay the same, so the bright places stay the same.</p>
-          <div class="move-buttons">
-            <button id="move-left" type="button">Move left</button>
-            <button id="move-right" type="button">Move right</button>
-            <button id="move-up" type="button">Move up</button>
-            <button id="move-down" type="button">Move down</button>
+        <details id="mask-translation">
+          <summary>Move the whole mask, keep the gaps</summary>
+          <div class="translation" aria-labelledby="translation-heading">
+            <h2 id="translation-heading">The sky doesn't move</h2>
+            <p>Move every hole by the same amount. Their gaps stay the same, so the bright places stay the same.</p>
+            <div class="move-buttons">
+              <button id="move-left" type="button">Move left</button>
+              <button id="move-right" type="button">Move right</button>
+              <button id="move-up" type="button">Move up</button>
+              <button id="move-down" type="button">Move down</button>
+            </div>
           </div>
-        </div>
+          <button id="mask-origin-selected" type="button">Put this opening at zero</button>
+          <p id="mask-origin-help">Move every opening together until the chosen one is at zero. The gaps and brightness stay the same. A mask that would leave the square cannot move.</p>
+        </details>
         <details id="mask-geometry">
           <summary>Change the gaps</summary>
           <div class="geometry-buttons">
             <button id="mask-turn-left" type="button">Turn the mask left</button>
             <button id="mask-reflect" type="button">Reflect the mask</button>
-            <button id="mask-origin-selected" type="button">Put this opening at zero</button>
             <button id="mask-shrink" type="button">Shrink the gaps</button>
             <button id="mask-expand" type="button">Widen the gaps</button>
             <button id="mask-center" type="button" disabled>Center the openings</button>
           </div>
-          <p id="mask-origin-help">Move every opening together until the chosen one is at zero. The gaps and brightness stay the same. A mask that would leave the square cannot move.</p>
           <p id="mask-center-help">Move the average opening to the middle. Gaps stay the same, so the brightness stays the same; the arriving arrows may turn. Undo returns the whole mask.</p>
           <p id="mask-geometry-help">These changes keep the holes together as a shape, but change their gaps or direction. The bright stripes change with them.</p>
         </details>

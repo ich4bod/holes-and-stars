@@ -49,11 +49,15 @@ input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px
 .mask-history button:disabled { opacity: .5; cursor: default; }
 .mask-history [hidden] { display: none !important; }
 #mask-history-help { color: var(--muted); font-size: 14px; margin: 12px 0; }
-.translation { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.translation { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
 .translation p { margin: 12px 0; color: var(--muted); font-size: 14px; }
+#mask-translation { margin-top: 20px; padding: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+#mask-translation > summary { min-height: 45px; padding: 8px 0; font: 16px system-ui, sans-serif; cursor: pointer; }
+#mask-translation #mask-origin-selected { width: 100%; }
+#mask-origin-help { color: var(--muted); margin: 12px 0; font-size: 14px; }
 .move-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-#mask-geometry { margin-top: 20px; padding: 0 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 14px; }
-#mask-geometry summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
+#mask-geometry { margin-top: 20px; padding: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; font-size: 14px; }
+#mask-geometry > summary { min-height: 45px; padding: 8px 0; font: 16px system-ui, sans-serif; cursor: pointer; }
 #mask-geometry .geometry-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 #mask-geometry .geometry-buttons button { flex: 1 1 140px; }
 #mask-center-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
