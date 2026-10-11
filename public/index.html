@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=755-1">
-  <script type="module" src="/app.mjs?v=755-1"></script>
+  <link rel="stylesheet" href="/style.css?v=762-1">
+  <script type="module" src="/app.mjs?v=762-1"></script>
 </head>
 <body>
   <main>
@@ -152,6 +152,14 @@
           <output id="brightness">Brightness: 100%</output>
           <svg id="wave-diagram" viewBox="0 0 360 220" role="img" aria-label="Together"></svg>
           <p id="selected-wave-label">Hole 1 arrives on the highlighted arrow.</p>
+          <details id="wave-components">
+            <summary>Read the arriving arrows</summary>
+            <table id="wave-components-table">
+              <thead><tr><th>Arrow</th><th>Horizontal</th><th>Vertical</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <p id="wave-components-help">These are signed field components, not brightness percentages. Add the arrows first; brightness comes from the squared length of their sum on the complete mask’s scale.</p>
+          </details>
           <details id="screen-slice">
             <summary id="slice-summary">Brightness through this spot</summary>
             <p id="slice-help">The slice crosses the inspected spot in the chosen direction. It shows raw intensity; the sky brightens dim light for display.</p>

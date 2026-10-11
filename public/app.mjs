@@ -29,6 +29,7 @@ const keptSliceLine = $('#slice-kept-line');
 const sliceAxis = $('#slice-axis');
 let selectedSliceAxis = 'row';
 const copyPoints = points => points.map(point => ({ ...point }));
+const formatComponent = value => Math.abs(value) < .0005 ? '0.000' : value.toFixed(3);
 const snapshot = () => ({ points: copyPoints(state.points), selected: state.selected });
 const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
   point.x === b[index].x && point.y === b[index].y);
@@ -199,6 +200,7 @@ function renderProbe() {
   const sum = field(state.points, state.probe.u, state.probe.v, options);
   $('#brightness').textContent = `Brightness: ${Math.round(100 * sum.intensity)}%`;
   $('#selected-wave-label').textContent = `Hole ${state.selected + 1} arrives on the highlighted arrow.`;
+  renderWaveComponents(sum);
   drawWaves(sum);
   drawSlice(sum, options);
 }
@@ -263,6 +265,21 @@ $('#screen-slice').addEventListener('toggle', () => {
 showKeptSlice.addEventListener('change', () => {
   keptSliceLine.toggleAttribute('hidden', keptMask === null || !showKeptSlice.checked);
 });
+
+function renderWaveComponents(sum) {
+  const body = $('#wave-components-table tbody');
+  const rows = sum.waves.map((wave, index) => [`Hole ${index + 1}`, wave.re, wave.im]);
+  rows.push(['Sum', sum.re, sum.im]);
+  body.replaceChildren(...rows.map(([label, re, im]) => {
+    const row = document.createElement('tr');
+    for (const value of [label, formatComponent(re), formatComponent(im)]) {
+      const cell = document.createElement('td');
+      cell.textContent = value;
+      row.append(cell);
+    }
+    return row;
+  }));
+}
 
 function drawWaves(sum) {
   const diagram = $('#wave-diagram');
