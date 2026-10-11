@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=762-2">
-  <script type="module" src="/app.mjs?v=762-2"></script>
+  <link rel="stylesheet" href="/style.css?v=777-1">
+  <script type="module" src="/app.mjs?v=777-1"></script>
 </head>
 <body>
   <main>
@@ -84,6 +84,11 @@
           <p id="mask-center-help">Move the average opening to the middle. Gaps stay the same, so the brightness stays the same; the arriving arrows may turn. Undo returns the whole mask.</p>
           <p id="mask-turn-more-help">The whole mask turns around its origin. The gaps and source order stay the same; the inspected spot stays where you put it. Undo turns the mask back.</p>
           <p id="mask-geometry-help">These changes keep the holes together as a shape, but change their gaps or direction. The bright stripes change with them.</p>
+        </details>
+        <details id="mask-span">
+          <summary>Read the gaps across this mask</summary>
+          <p id="mask-span-readout"></p>
+          <p id="mask-span-help">These spans run between the outermost opening centers. Moving the whole mask keeps them; changing gaps can change them. They are not the width and height of an individual opening.</p>
         </details>
         <details id="mask-memory">
           <summary>Keep a mask for comparison</summary>

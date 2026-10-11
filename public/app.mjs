@@ -160,6 +160,11 @@ function renderSource() {
     $(`#hole-${axis}-value`).textContent = point[axis].toFixed(2);
   }
   $('#hole-count').textContent = `${state.points.length} of 8 holes`;
+  const xs = state.points.map(point => point.x);
+  const ys = state.points.map(point => point.y);
+  const spanX = Math.max(...xs) - Math.min(...xs);
+  const spanY = Math.max(...ys) - Math.min(...ys);
+  $('#mask-span-readout').textContent = `Center span: x ${spanX.toFixed(2)} · y ${spanY.toFixed(2)} mask units.`;
   updateKeptMask();
   updateCenterButton();
   updateOriginButton();
