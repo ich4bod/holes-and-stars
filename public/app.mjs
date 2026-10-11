@@ -203,6 +203,14 @@ function renderProbe() {
   }
   const options = modelOptions();
   const sum = field(state.points, state.probe.u, state.probe.v, options);
+  const pointOptions = { ...options, width: 0, height: 0 };
+  const point = field(state.points, state.probe.u, state.probe.v, pointOptions);
+  const sinc = value => value === 0 ? 1 : Math.sin(Math.PI * value) / (Math.PI * value);
+  const patchEnvelope = sinc(state.opening.width * state.probe.u)
+    * sinc(state.opening.height * state.probe.v);
+  const envelopeSquared = patchEnvelope * patchEnvelope;
+  const percentage = value => (100 * value).toFixed(3);
+  $('#field-factors-readout').textContent = `Point-source brightness ${percentage(point.intensity)}% · patch envelope squared ${percentage(envelopeSquared)}% · current brightness ${percentage(point.intensity * envelopeSquared)}%.`;
   $('#brightness').textContent = `Brightness: ${Math.round(100 * sum.intensity)}%`;
   $('#selected-wave-label').textContent = `Hole ${state.selected + 1} arrives on the highlighted arrow.`;
   renderWaveComponents(sum);

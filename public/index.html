@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=777-1">
-  <script type="module" src="/app.mjs?v=777-1"></script>
+  <link rel="stylesheet" href="/style.css?v=794-1">
+  <script type="module" src="/app.mjs?v=794-1"></script>
 </head>
 <body>
   <main>
@@ -159,6 +159,11 @@
           </details>
           <output id="brightness">Brightness: 100%</output>
           <svg id="wave-diagram" viewBox="0 0 360 220" role="img" aria-label="Together"></svg>
+          <details id="field-factors">
+            <summary>Separate interference from the opening envelope</summary>
+            <p id="field-factors-readout">Point-source brightness P% · patch envelope squared E% · current brightness C%.</p>
+            <p id="field-factors-help">The point-source pattern uses the same centers, phases and strengths without the rectangular patches. The squared envelope multiplies that brightness. This keeps cancellation separate from the broad opening shape, even where the envelope is zero.</p>
+          </details>
           <p id="selected-wave-label">Hole 1 arrives on the highlighted arrow.</p>
           <details id="wave-components">
             <summary>Read the arriving arrows</summary>
