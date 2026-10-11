@@ -1,0 +1,79 @@
+{
+  "slug": "holes-and-stars",
+  "mode": "crosses",
+  "lane": 20,
+  "title": "Holes & Stars — Stretch and shear a four-opening frame",
+  "group": "Stretch and shear",
+  "helpID": "frame-shear-study-help",
+  "help": "All three frames keep four openings. Stretching the horizontal gap changes the spacing of interference; shearing makes a tilted arrangement without changing the opening patches. The chosen sky spot and illumination stay put. Undo restores the prior mask.",
+  "rows": [
+    [
+      "frame-square-four",
+      "A square frame",
+      [
+        [
+          -0.4,
+          -0.4
+        ],
+        [
+          0.4,
+          -0.4
+        ],
+        [
+          -0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    ],
+    [
+      "frame-wide-four",
+      "A wide frame",
+      [
+        [
+          -0.8,
+          -0.4
+        ],
+        [
+          0.8,
+          -0.4
+        ],
+        [
+          -0.8,
+          0.4
+        ],
+        [
+          0.8,
+          0.4
+        ]
+      ]
+    ],
+    [
+      "frame-shear-four",
+      "A sheared frame",
+      [
+        [
+          -0.6,
+          -0.4
+        ],
+        [
+          0.2,
+          -0.4
+        ],
+        [
+          -0.2,
+          0.4
+        ],
+        [
+          0.6,
+          0.4
+        ]
+      ]
+    ]
+  ],
+  "depends": "815",
+  "message": "crosses choices preserve exact authored data and the independent kept experiment"
+}
