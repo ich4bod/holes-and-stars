@@ -1,0 +1,125 @@
+{
+  "mode": "crosses",
+  "lane": 20,
+  "depends": "815",
+  "title": "Holes & Stars \u2014 Compare an eight-opening comb frame and missing-corner lattice",
+  "message": "three eight-source masks compare ordered gaps on one unchanged intensity scale",
+  "rows": [
+    [
+      "eight-comb",
+      "Eight in two rows",
+      [
+        [
+          -0.6,
+          -0.2
+        ],
+        [
+          -0.2,
+          -0.2
+        ],
+        [
+          0.2,
+          -0.2
+        ],
+        [
+          0.6,
+          -0.2
+        ],
+        [
+          -0.6,
+          0.2
+        ],
+        [
+          -0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2
+        ],
+        [
+          0.6,
+          0.2
+        ]
+      ]
+    ],
+    [
+      "eight-frame",
+      "A square frame",
+      [
+        [
+          -0.6,
+          -0.6
+        ],
+        [
+          0,
+          -0.6
+        ],
+        [
+          0.6,
+          -0.6
+        ],
+        [
+          0.6,
+          0
+        ],
+        [
+          0.6,
+          0.6
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          -0.6,
+          0.6
+        ],
+        [
+          -0.6,
+          0
+        ]
+      ]
+    ],
+    [
+      "eight-corner",
+      "A lattice missing one corner",
+      [
+        [
+          -0.6,
+          -0.6
+        ],
+        [
+          0,
+          -0.6
+        ],
+        [
+          0.6,
+          -0.6
+        ],
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0.6,
+          0
+        ],
+        [
+          -0.6,
+          0.6
+        ],
+        [
+          0,
+          0.6
+        ]
+      ]
+    ]
+  ],
+  "help": "Each mask has eight point sources on the same normalized scale. A comb, a frame and a missing corner change the gaps and their directions, not the chosen screen spot or opening width.",
+  "helpID": "eight-mask-help"
+}
