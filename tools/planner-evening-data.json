@@ -1,0 +1,56 @@
+{
+  "slug": "holes-and-stars",
+  "mode": "crosses",
+  "lane": 20,
+  "title": "Holes & Stars — Move a two-opening pair without changing its gap",
+  "group": "Same gap, three places",
+  "helpID": "pair-common-shift-help",
+  "help": "These pairs keep the same horizontal gap and source order. Moving both openings together turns every arriving arrow by a common phase; the ideal far-field brightness stays the same. The chosen sky spot and opening patches stay put. Undo restores the mask.",
+  "rows": [
+    [
+      "shift-pair-origin",
+      "Pair across the origin",
+      [
+        [
+          -0.4,
+          0
+        ],
+        [
+          0.4,
+          0
+        ]
+      ]
+    ],
+    [
+      "shift-pair-raised",
+      "The same pair raised",
+      [
+        [
+          -0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    ],
+    [
+      "shift-pair-slant-place",
+      "The same pair shifted right and up",
+      [
+        [
+          -0.2,
+          0.3
+        ],
+        [
+          0.6,
+          0.3
+        ]
+      ]
+    ]
+  ],
+  "depends": "815",
+  "message": "crosses experiments keep the supplied choices silent and reversible",
+  "facts": "Model phase=−2π(u*x+v*y)+existing per-source phase. Translating both points adds the same phase; sum magnitude/intensity is invariant, including unequal source strength and envelope when unchanged. All pair gaps.8; ordinary equal-phase/equal-strength point first horizontal nullu=.625. Floating brightness equality tolerance1e-12, not bitwise trig equality. Preserve exact supplied coordinates and source order. No screen/patch/illumination reset."
+}
