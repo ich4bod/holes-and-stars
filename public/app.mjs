@@ -515,6 +515,12 @@ for (const [id, transform] of [
   ['mask-turn-half', point => ({
     x: point.x === 0 ? 0 : -point.x, y: point.y === 0 ? 0 : -point.y,
   })],
+  ['mask-diagonal-up', point => ({
+    x: point.y === 0 ? 0 : point.y, y: point.x === 0 ? 0 : point.x,
+  })],
+  ['mask-diagonal-down', point => ({
+    x: point.y === 0 ? 0 : -point.y, y: point.x === 0 ? 0 : -point.x,
+  })],
   ['mask-reflect', point => ({ x: roundCoordinate(-point.x), y: point.y })],
   ['mask-shrink', point => ({
     x: roundCoordinate(point.x * .8), y: roundCoordinate(point.y * .8),

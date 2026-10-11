@@ -87,7 +87,8 @@ input[type="range"] { display: block; margin: 0 0 8px; width: 100%; height: 44px
 #mask-geometry > summary { min-height: 45px; padding: 8px 0; font: 16px system-ui, sans-serif; cursor: pointer; }
 #mask-geometry .geometry-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 #mask-geometry .geometry-buttons button { flex: 1 1 140px; }
-#mask-turn-right, #mask-turn-half { min-height: 45px; }
+#mask-turn-right, #mask-turn-half, #mask-diagonal-up, #mask-diagonal-down { min-height: 45px; font: 16px system-ui, sans-serif; }
+#mask-diagonal-help { color: var(--muted); margin: 12px 0; font: 16px system-ui, sans-serif; overflow-wrap: anywhere; }
 #mask-turn-more-help { color: var(--muted); margin: 12px 0; }
 #mask-center-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
 #mask-geometry-help { color: var(--muted); margin: 12px 0; }
