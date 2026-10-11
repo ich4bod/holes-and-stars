@@ -1,0 +1,99 @@
+{
+  "slug": "holes-and-stars",
+  "mode": "crosses",
+  "lane": 20,
+  "title": "Holes & Stars \u2014 Offset one three-opening column against another",
+  "group": "Two columns answering",
+  "helpID": "mask-column-help",
+  "help": "Two columns can face each other, shift one column upward, or lose its middle opening. The dot coordinates are the experiment; the ideal point openings have no width. Using a mask changes only the openings and chosen identity, not the screen point or opening settings. Undo restores the previous mask.",
+  "rows": [
+    [
+      "column-facing",
+      "Two facing columns",
+      [
+        [
+          -0.4,
+          -0.4
+        ],
+        [
+          -0.4,
+          0
+        ],
+        [
+          -0.4,
+          0.4
+        ],
+        [
+          0.4,
+          -0.4
+        ],
+        [
+          0.4,
+          0
+        ],
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    ],
+    [
+      "column-shifted",
+      "Right column shifted upward",
+      [
+        [
+          -0.4,
+          -0.4
+        ],
+        [
+          -0.4,
+          0
+        ],
+        [
+          -0.4,
+          0.4
+        ],
+        [
+          0.4,
+          -0.2
+        ],
+        [
+          0.4,
+          0.2
+        ],
+        [
+          0.4,
+          0.6
+        ]
+      ]
+    ],
+    [
+      "column-gap",
+      "Right column missing its middle",
+      [
+        [
+          -0.4,
+          -0.4
+        ],
+        [
+          -0.4,
+          0
+        ],
+        [
+          -0.4,
+          0.4
+        ],
+        [
+          0.4,
+          -0.4
+        ],
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    ]
+  ],
+  "depends": "nothing",
+  "message": "crosses comparisons preserve the authored experiment without replacing its memory"
+}
