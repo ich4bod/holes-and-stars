@@ -1,0 +1,15 @@
+{
+  "oppositedirect": {
+    "lane": 20,
+    "depends": "nothing",
+    "title": "Holes & Stars \u2014 Put the opposite-spot gesture beside the probe axes",
+    "message": "opposite inspection is direct beside the axes with no extra disclosure or mask edit",
+    "buttons": [
+      "probe-opposite"
+    ],
+    "copy": {
+      "probe-opposite": "Inspect the opposite spot",
+      "probe-opposite-help": "Inspect the point across the center. Equal-phase masks have matching brightness there; source phases can break that symmetry. The openings stay put."
+    }
+  }
+}
