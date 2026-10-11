@@ -1,0 +1,55 @@
+{
+  "slug": "holes-and-stars",
+  "mode": "crosses",
+  "lane": 20,
+  "title": "Holes & Stars \u2014 Keep two sources while turning and widening their gap",
+  "rows": [
+    [
+      "pair-close",
+      "Two close openings",
+      [
+        [
+          -0.25,
+          0
+        ],
+        [
+          0.25,
+          0
+        ]
+      ]
+    ],
+    [
+      "pair-far",
+      "Two widely spaced openings",
+      [
+        [
+          -0.75,
+          0
+        ],
+        [
+          0.75,
+          0
+        ]
+      ]
+    ],
+    [
+      "pair-up",
+      "The wide pair turned upward",
+      [
+        [
+          0,
+          -0.75
+        ],
+        [
+          0,
+          0.75
+        ]
+      ]
+    ]
+  ],
+  "group": "Two gaps, two directions",
+  "help": "Each mask keeps exactly two point sources. A wider gap places the first horizontal cancellation nearer the center; turning the pair turns that direction. The screen spot, opening envelope and kept mask stay put.",
+  "helpID": "pair-spacing-help",
+  "depends": "815",
+  "message": "crosses studies preserve their supplied values and independent memory"
+}

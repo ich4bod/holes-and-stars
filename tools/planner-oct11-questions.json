@@ -1,0 +1,35 @@
+{
+  "slug": "holes-and-stars",
+  "lane": 20,
+  "title": "Holes & Stars \u2014 Ask whether a dark spot means the sources are absent",
+  "id": "three-questions-holes-and-stars",
+  "summary": "Try three questions about a dark spot",
+  "lead": "Use Pair and the existing screen probe. The sky shows normalized brightness, not a photograph or a transmitted-energy meter.",
+  "questions": [
+    {
+      "title": "Can two lit openings make a dark spot?",
+      "prompt": "Choose Pair with point openings, equal strengths and the same source phase. Set the probe to u = 0.5 and v = 0. Read the arriving arrows as well as the brightness.",
+      "answer": "Yes. The centers at x = \u22120.5 and +0.5 give opposite arriving phases at that spot. Their signed components cancel. Each contribution exists even though the sum is dark."
+    },
+    {
+      "title": "Does a wider gap push that cancellation outward?",
+      "prompt": "Keep the Pair mask. Widen its gap and move the horizontal probe until the first dark spot returns. Watch the coordinates rather than guessing from the sky\u2019s glow.",
+      "answer": "It moves inward. For two equal point sources separated by gap d, the first horizontal null is at u = 1/(2d). A gap of 1 gives 0.5; a gap of 1.5 gives about 0.333. The rectangular opening envelope is a separate factor."
+    },
+    {
+      "title": "Does closing one opening restore full brightness?",
+      "prompt": "Choose Ring, point openings and only the chosen opening. Inspect the center. Compare it with lighting all six openings.",
+      "answer": "No. This toy keeps the complete six-opening normalization. One full-amplitude source contributes brightness 1/36, about 2.778%, at the center. It does not renormalize the single surviving source to 100%. Closing sources and changing the common scale are different operations."
+    }
+  ],
+  "facts": "Pairequal point intensitycos\u00b2(\u03c0du). Firstnull1/(2d). RingN6 singleintensity1/36. Current normalizationN\u00b2, all illumination and envelope controls shipped.",
+  "palette": "#080e19/#eef4ff/#101c2a/#ffd38a",
+  "files": [
+    "public/index.html",
+    "public/style.css"
+  ],
+  "root": "main",
+  "anchor": "footer",
+  "url": "https://holes-and-stars.ichabod-crane.net/",
+  "message": "three authored holes-and-stars questions stay optional and leave the live experiment alone"
+}
