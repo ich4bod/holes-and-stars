@@ -56,8 +56,22 @@ function canReturnKeptMask() {
     && (!sameMask(keptMask.points, state.points) || keptMask.selected !== state.selected);
 }
 
+function chosenKeptPointCandidate() {
+  if (keptMask === null || !Number.isInteger(state.selected)
+      || state.selected < 0 || state.selected >= keptMask.points.length) return null;
+  const candidate = copyPoints(state.points);
+  candidate[state.selected] = { ...keptMask.points[state.selected] };
+  return candidate;
+}
+
+function canReturnKeptPoint(candidate) {
+  return candidate !== null && gesture === null && !maskCandidateMessage(candidate)
+    && !sameMask(candidate, state.points);
+}
+
 function updateKeptMask() {
   returnButton.disabled = !canReturnKeptMask();
+  $('#mask-return-hole').disabled = !canReturnKeptPoint(chosenKeptPointCandidate());
   forgetButton.disabled = keptMask === null;
   keptInfo.textContent = keptMask === null
     ? 'No mask kept.' : `Kept mask: ${keptMask.points.length} holes.`;
@@ -74,6 +88,11 @@ keepButton.addEventListener('click', () => {
 returnButton.addEventListener('click', () => {
   if (!canReturnKeptMask()) return;
   commitMask(keptMask.points, keptMask.selected);
+});
+$('#mask-return-hole').addEventListener('click', () => {
+  const candidate = chosenKeptPointCandidate();
+  if (!canReturnKeptPoint(candidate)) return;
+  commitMask(candidate, state.selected);
 });
 forgetButton.addEventListener('click', () => {
   keptMask = null;
