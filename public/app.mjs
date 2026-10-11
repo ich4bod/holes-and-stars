@@ -281,11 +281,11 @@ showKeptSlice.addEventListener('change', () => {
 
 function renderWaveComponents(sum) {
   const body = $('#wave-components-table tbody');
-  const rows = sum.waves.map((wave, index) => [`Hole ${index + 1}`, wave.re, wave.im]);
-  rows.push(['Sum', sum.re, sum.im]);
-  body.replaceChildren(...rows.map(([label, re, im]) => {
+  const rows = sum.waves.map((wave, index) => [`Hole ${index + 1}`, wave.re, wave.im, Math.hypot(wave.re, wave.im)]);
+  rows.push(['Sum', sum.re, sum.im, Math.hypot(sum.re, sum.im)]);
+  body.replaceChildren(...rows.map(([label, re, im, length]) => {
     const row = document.createElement('tr');
-    for (const value of [label, formatComponent(re), formatComponent(im)]) {
+    for (const value of [label, formatComponent(re), formatComponent(im), formatComponent(length)]) {
       const cell = document.createElement('td');
       cell.textContent = value;
       row.append(cell);

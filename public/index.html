@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
   <link rel="stylesheet" href="/style.css?v=794-1">
-  <script type="module" src="/app.mjs?v=794-1"></script>
+  <script type="module" src="/app.mjs?v=796-1"></script>
 </head>
 <body>
   <main>
@@ -168,10 +168,11 @@
           <details id="wave-components">
             <summary>Read the arriving arrows</summary>
             <table id="wave-components-table">
-              <thead><tr><th>Arrow</th><th>Horizontal</th><th>Vertical</th></tr></thead>
+              <thead><tr><th>Arrow</th><th>Horizontal</th><th>Vertical</th><th>Length</th></tr></thead>
               <tbody></tbody>
             </table>
             <p id="wave-components-help">These are signed field components, not brightness percentages. Add the arrows first; brightness comes from the squared length of their sum on the complete mask’s scale.</p>
+            <p id="wave-length-help">Lengths describe raw arrows, not brightness. The sum can be shorter than any one part because signed components cancel. Brightness still uses the squared sum on the complete mask’s scale.</p>
           </details>
           <details id="screen-slice">
             <summary id="slice-summary">Brightness through this spot</summary>
