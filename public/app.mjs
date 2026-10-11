@@ -2,6 +2,8 @@ import { PRESETS, raster, field } from './model.mjs?v=750-1';
 
 const $ = selector => document.querySelector(selector);
 const mask = $('#mask');
+const crossMask = $('#cross-mask');
+const crossMaskApply = $('#cross-mask-apply');
 const holeList = $('#hole-list');
 const ranges = { x: $('#hole-x'), y: $('#hole-y') };
 const status = $('#status');
@@ -29,6 +31,12 @@ const keptSliceLine = $('#slice-kept-line');
 const sliceAxis = $('#slice-axis');
 let selectedSliceAxis = 'row';
 const copyPoints = points => points.map(point => ({ ...point }));
+const crossedMasks = Object.freeze({
+  'cross-five': Object.freeze([[-.6, 0], [0, -.6], [0, 0], [0, .6], [.6, 0]]),
+  'cross-four': Object.freeze([[-.6, 0], [0, -.6], [0, .6], [.6, 0]]),
+  'cross-missing': Object.freeze([[-.6, 0], [0, -.6], [0, 0], [.6, 0]]),
+});
+const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const formatComponent = value => Math.abs(value) < .0005 ? '0.000' : value.toFixed(3);
 const snapshot = () => ({ points: copyPoints(state.points), selected: state.selected });
 const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
@@ -70,6 +78,18 @@ forgetButton.addEventListener('click', () => {
   scheduleProbe();
 });
 
+function updateCrossMaskButton() {
+  const candidate = crossedMaskCandidate(crossMask.value);
+  crossMaskApply.disabled = gesture !== null || sameMask(candidate, state.points);
+}
+
+crossMask.addEventListener('change', updateCrossMaskButton);
+crossMaskApply.addEventListener('click', () => {
+  const candidate = crossedMaskCandidate(crossMask.value);
+  if (gesture !== null || sameMask(candidate, state.points)) return;
+  commitMask(candidate, 0);
+});
+
 function updateHistoryButtons() {
   undoButton.disabled = gesture !== null || past.length === 0;
   redoButton.disabled = gesture !== null || future.length === 0;
@@ -77,6 +97,7 @@ function updateHistoryButtons() {
   updateKeptMask();
   updateCenterButton();
   updateOriginButton();
+  updateCrossMaskButton();
 }
 
 function pushSnapshot(stack, saved) {

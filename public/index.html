@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=794-1">
-  <script type="module" src="/app.mjs?v=796-1"></script>
+  <link rel="stylesheet" href="/style.css?v=795-1">
+  <script type="module" src="/app.mjs?v=797-1"></script>
 </head>
 <body>
   <main>
@@ -38,6 +38,16 @@
             </div>
             <p id="array-presets-help">Three masks, four openings each. Equal gaps, one stretched gap, or two directions: the sky follows the arrangement.</p>
             <p id="array-shape-studies-help">Four openings each: stretch the rows, turn the arrangement, or bring two columns closer. The brightness still uses the same four-source scale.</p>
+            <div class="crossed-mask-controls">
+              <label for="cross-mask">Crossed openings</label>
+              <select id="cross-mask">
+                <option value="cross-five" selected>A center and four arms</option>
+                <option value="cross-four">Four arms, no center</option>
+                <option value="cross-missing">One missing arm</option>
+              </select>
+              <button id="cross-mask-apply" type="button">Use this crossed mask</button>
+            </div>
+            <p id="cross-mask-help">Compare the same crossed arrangement with its center or one arm missing. This changes openings, not their width or the chosen sky spot. Undo brings the old mask back.</p>
           </details>
         </div>
         <svg id="mask" viewBox="-1 -1 2 2" role="img" aria-label="The mask" aria-describedby="mask-instructions"></svg>
