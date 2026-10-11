@@ -1,0 +1,24 @@
+{
+  "diagonal": {
+    "copy": {
+      "mask-diagonal-up": "Reflect across y = x",
+      "mask-diagonal-down": "Reflect across y = \u2212x",
+      "mask-diagonal-help": "Exchange the two opening coordinates, with or without reversing their signs. Source order and gaps stay the same; the inspected spot stays put. Undo restores the whole mask."
+    },
+    "buttons": [
+      "mask-diagonal-up",
+      "mask-diagonal-down"
+    ],
+    "message": "diagonal preserves unrelated state and answers its supplied native experiment"
+  },
+  "returnhole": {
+    "copy": {
+      "mask-return-hole": "Return only this opening",
+      "mask-return-hole-help": "Return the chosen opening to the same numbered opening in the kept mask. Other openings and the inspected spot stay put. A missing kept opening or a collision leaves it unavailable. Undo restores the whole edit."
+    },
+    "buttons": [
+      "mask-return-hole"
+    ],
+    "message": "returnhole preserves unrelated state and answers its supplied native experiment"
+  }
+}
