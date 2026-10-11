@@ -57,7 +57,7 @@ button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold);
 #cross-mask-apply { flex: 1 1 100%; min-height: 45px; font: 16px system-ui, sans-serif; }
 #cross-mask-apply:disabled { opacity: .5; cursor: default; }
 .crossed-mask-controls :focus-visible { outline-color: var(--gold); }
-#cross-mask-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
+#cross-mask-help, #eight-mask-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
 #mask { display: block; width: 100%; aspect-ratio: 1; background: var(--panel); outline: 1px solid var(--line); border-radius: 2px; touch-action: none; cursor: crosshair; user-select: none; }
 .hole { cursor: grab; }
 .hole:active { cursor: grabbing; }
