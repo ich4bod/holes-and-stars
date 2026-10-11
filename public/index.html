@@ -166,11 +166,8 @@
             <label for="probe-v">Screen v <output id="probe-v-value">0.00</output></label>
             <input id="probe-v" type="range" min="-6" max="6" step=".05" value="0">
           </div>
-          <details id="probe-opposite-details">
-            <summary>Inspect the point across the center</summary>
-            <button id="probe-opposite" type="button" disabled>Inspect the opposite spot</button>
-            <p id="probe-opposite-help">Inspect the point across the center. Equal-phase masks have matching brightness there; source phases can break that symmetry. The openings stay put.</p>
-          </details>
+          <button id="probe-opposite" type="button" disabled>Inspect the opposite spot</button>
+          <p id="probe-opposite-help">Inspect the point across the center. Equal-phase masks have matching brightness there; source phases can break that symmetry. The openings stay put.</p>
           <output id="brightness">Brightness: 100%</output>
           <svg id="wave-diagram" viewBox="0 0 360 220" role="img" aria-label="Together"></svg>
           <details id="field-factors">
