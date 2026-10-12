@@ -1,0 +1,82 @@
+{
+  "slug": "holes-and-stars",
+  "mode": "crosses",
+  "lane": 20,
+  "title": "Holes & Stars — Compare two missing corners with their complete square",
+  "group": "Which corner is absent",
+  "helpID": "mask-corner-absence-help",
+  "help": "The two three-opening masks omit opposite corners of the same square. The third restores all four corners. These are ideal point openings, not square windows. Using changes only the mask; the inspected spot and opening settings stay put.",
+  "rows": [
+    [
+      "corner-no-upper-right",
+      "Three corners, no upper right",
+      [
+        [
+          -0.4,
+          -0.4
+        ],
+        [
+          0.4,
+          -0.4
+        ],
+        [
+          -0.4,
+          0.4
+        ]
+      ]
+    ],
+    [
+      "corner-no-lower-left",
+      "Three corners, no lower left",
+      [
+        [
+          0.4,
+          -0.4
+        ],
+        [
+          -0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    ],
+    [
+      "corner-complete-square",
+      "All four corners",
+      [
+        [
+          -0.4,
+          -0.4
+        ],
+        [
+          0.4,
+          -0.4
+        ],
+        [
+          -0.4,
+          0.4
+        ],
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    ]
+  ],
+  "depends": "nothing",
+  "message": "crosses experiments keep their distinct rules and exact supplied choices",
+  "facts": "Source order is exactly supplied. All within[-1,1], no duplicates. Three-source arrays are oppositely missing corners, not an equal-brightness claim under arbitrary phase/strength/chosen illumination. Preserve envelope/illumination and probe settings.",
+  "picker": "cross-mask",
+  "noteID": "choice-note-holes-and-stars",
+  "noteLead": "About the selected choice: ",
+  "noteFallback": "Other choices keep their existing descriptions.",
+  "notes": [
+    "The omitted corner is at positive x and positive y. Three equal-phase point sources would all agree at the screen origin; other illumination choices remain yours.",
+    "The omitted corner is at negative x and negative y. This exchanges which corner is missing; it does not move your screen probe or reset phase and strength choices.",
+    "All four corners are present, at x and y values of minus or plus 0.4. More openings change the source sum as well as the gaps; a finite opening envelope remains a separate setting."
+  ],
+  "noteMessage": "the selected holes-and-stars choice explains its own experiment without adding an action"
+}
