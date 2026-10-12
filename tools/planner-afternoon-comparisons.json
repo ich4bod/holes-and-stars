@@ -1,0 +1,272 @@
+{
+  "uneven-line": {
+    "slug": "holes-and-stars",
+    "mode": "crosses",
+    "lane": 20,
+    "depends": 911,
+    "title": "Holes & Stars \u2014 Spread four openings evenly or gather them into pairs",
+    "group": "Four openings, uneven gaps",
+    "rows": [
+      [
+        "line-even",
+        "Four evenly spaced openings",
+        [
+          [
+            -0.75,
+            0
+          ],
+          [
+            -0.25,
+            0
+          ],
+          [
+            0.25,
+            0
+          ],
+          [
+            0.75,
+            0
+          ]
+        ]
+      ],
+      [
+        "line-inner",
+        "A close inner pair",
+        [
+          [
+            -0.75,
+            0
+          ],
+          [
+            -0.1,
+            0
+          ],
+          [
+            0.1,
+            0
+          ],
+          [
+            0.75,
+            0
+          ]
+        ]
+      ],
+      [
+        "line-outer",
+        "Two close outer pairs",
+        [
+          [
+            -0.75,
+            0
+          ],
+          [
+            -0.6,
+            0
+          ],
+          [
+            0.6,
+            0
+          ],
+          [
+            0.75,
+            0
+          ]
+        ]
+      ]
+    ],
+    "notes": [
+      "Four point openings span one and a half mask units, with equal half-unit gaps. Illumination and the inspected spot stay put.",
+      "The same outer openings frame a close inner pair. The middle gap is 0.2 mask units; this is not a continuous slit.",
+      "Four openings gather into two outer pairs, with within-pair gaps of 0.15 mask units and a central gap of 1.2."
+    ],
+    "noteID": "choice-note-holes-and-stars",
+    "noteLead": "About the selected choice: ",
+    "picker": "cross-mask",
+    "facts": "Source order exactly supplied, all within[-1,1], no duplicates. All rows centroid0/bounds[-.75,.75]; spacings .5/.5/.5, .65/.2/.65, .15/1.2/.15. Gaps are toy mask units, not physical mm.",
+    "message": "uneven-line choices preserve exact data silent selection and independent memory"
+  },
+  "triangle-shift": {
+    "slug": "holes-and-stars",
+    "mode": "crosses",
+    "lane": 20,
+    "depends": 911,
+    "title": "Holes & Stars \u2014 Move an entire three-opening triangle without changing its shape",
+    "group": "One triangle, three places",
+    "rows": [
+      [
+        "triangle-center",
+        "Triangle at the center",
+        [
+          [
+            -0.4,
+            -0.2
+          ],
+          [
+            0.4,
+            -0.2
+          ],
+          [
+            0,
+            0.4
+          ]
+        ]
+      ],
+      [
+        "triangle-above",
+        "Triangle translated up",
+        [
+          [
+            -0.4,
+            0
+          ],
+          [
+            0.4,
+            0
+          ],
+          [
+            0,
+            0.6
+          ]
+        ]
+      ],
+      [
+        "triangle-right",
+        "Triangle translated right",
+        [
+          [
+            -0.2,
+            -0.2
+          ],
+          [
+            0.6,
+            -0.2
+          ],
+          [
+            0.2,
+            0.4
+          ]
+        ]
+      ]
+    ],
+    "notes": [
+      "Three ideal point openings make the centered triangle. Using changes the mask, not the selected illumination or spot.",
+      "Every source moves up by 0.2 mask units. Relative gaps are unchanged; a common translation changes shared phase, not ideal point-array brightness.",
+      "Every source moves right by 0.2 mask units. Relative gaps are unchanged. This is a common move of the array, not of the inspected sky spot."
+    ],
+    "noteID": "choice-note-holes-and-stars",
+    "noteLead": "About the selected choice: ",
+    "picker": "cross-mask",
+    "facts": "Rows are base triangle plus(0,0), (0,.2), (.2,0). Equal source amplitudes/phase array factor acquires common exp(i*2*pi*(dx*u+dy*v)); |sum|\u00b2 unchanged under translation. Keep arbitrary shipped source strength/phase settings; common translation still factors. Opening envelope not changed.",
+    "message": "triangle-shift choices preserve exact data silent selection and independent memory"
+  },
+  "paired-columns": {
+    "slug": "holes-and-stars",
+    "mode": "crosses",
+    "lane": 20,
+    "depends": 911,
+    "title": "Holes & Stars \u2014 Tilt three horizontal pairs without moving their centers",
+    "group": "Three pairs, three directions",
+    "rows": [
+      [
+        "pairs-horizontal",
+        "Three horizontal pairs",
+        [
+          [
+            -0.2,
+            -0.6
+          ],
+          [
+            0.2,
+            -0.6
+          ],
+          [
+            -0.2,
+            0
+          ],
+          [
+            0.2,
+            0
+          ],
+          [
+            -0.2,
+            0.6
+          ],
+          [
+            0.2,
+            0.6
+          ]
+        ]
+      ],
+      [
+        "pairs-diagonal",
+        "Three diagonal pairs",
+        [
+          [
+            -0.12,
+            -0.76
+          ],
+          [
+            0.12,
+            -0.44
+          ],
+          [
+            -0.12,
+            -0.16
+          ],
+          [
+            0.12,
+            0.16
+          ],
+          [
+            -0.12,
+            0.44
+          ],
+          [
+            0.12,
+            0.76
+          ]
+        ]
+      ],
+      [
+        "pairs-vertical",
+        "Three vertical pairs",
+        [
+          [
+            0,
+            -0.8
+          ],
+          [
+            0,
+            -0.4
+          ],
+          [
+            0,
+            -0.2
+          ],
+          [
+            0,
+            0.2
+          ],
+          [
+            0,
+            0.4
+          ],
+          [
+            0,
+            0.8
+          ]
+        ]
+      ]
+    ],
+    "notes": [
+      "Three pair centers lie on the vertical axis. Each horizontal pair has a 0.4-mask-unit gap.",
+      "Each pair turns diagonally around its own center. The 0.24 by 0.32 displacement still has length 0.4 mask units.",
+      "Each pair turns upright around its own center. Pair gaps remain 0.4; the three centers stay at -0.6, 0 and 0.6."
+    ],
+    "noteID": "choice-note-holes-and-stars",
+    "noteLead": "About the selected choice: ",
+    "picker": "cross-mask",
+    "facts": "Each pair center (0,-.6),(0,0),(0,.6); displacement vector(.4,0),(.24,.32),(0,.4), lengths .4 since .24\u00b2+.32\u00b2=.16. Exact coordinates supplied avoid trig mismatch. Six unique sources per row.",
+    "message": "paired-columns choices preserve exact data silent selection and independent memory"
+  }
+}
