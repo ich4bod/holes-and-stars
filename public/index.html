@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=875-1">
-  <script type="module" src="/app.mjs?v=875-1"></script>
+  <link rel="stylesheet" href="/style.css?v=886-1">
+  <script type="module" src="/app.mjs?v=886-1"></script>
 </head>
 <body>
   <main>
@@ -57,10 +57,16 @@
                   <option value="frame-wide-four">A wide frame</option>
                   <option value="frame-shear-four">A sheared frame</option>
                 </optgroup>
+                <optgroup label="Same gap, three places">
+                  <option value="shift-pair-origin">Pair across the origin</option>
+                  <option value="shift-pair-raised">The same pair raised</option>
+                  <option value="shift-pair-slant-place">The same pair shifted right and up</option>
+                </optgroup>
               </select>
               <button id="cross-mask-apply" type="button">Use this crossed mask</button>
             </div>
             <p id="cross-mask-help">Compare the same crossed arrangement with its center or one arm missing. This changes openings, not their width or the chosen sky spot. Undo brings the old mask back.</p>
+            <p id="pair-common-shift-help">These pairs keep the same horizontal gap and source order. Moving both openings together turns every arriving arrow by a common phase; the ideal far-field brightness stays the same. The chosen sky spot and opening patches stay put. Undo restores the mask.</p>
             <p id="frame-shear-study-help">All three frames keep four openings. Stretching the horizontal gap changes the spacing of interference; shearing makes a tilted arrangement without changing the opening patches. The chosen sky spot and illumination stay put. Undo restores the prior mask.</p>
             <p id="pair-spacing-help">Each mask keeps exactly two point sources. A wider gap places the first horizontal cancellation nearer the center; turning the pair turns that direction. The screen spot, opening envelope and kept mask stay put.</p>
             <p id="eight-mask-help">Each mask has eight point sources on the same normalized scale. A comb, a frame and a missing corner change the gaps and their directions, not the chosen screen spot or opening width.</p>

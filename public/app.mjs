@@ -44,6 +44,9 @@ const crossedMasks = Object.freeze({
   'frame-square-four': Object.freeze([[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]]),
   'frame-wide-four': Object.freeze([[-0.8, -0.4], [0.8, -0.4], [-0.8, 0.4], [0.8, 0.4]]),
   'frame-shear-four': Object.freeze([[-0.6, -0.4], [0.2, -0.4], [-0.2, 0.4], [0.6, 0.4]]),
+  'shift-pair-origin': Object.freeze([[-0.4, 0], [0.4, 0]]),
+  'shift-pair-raised': Object.freeze([[-0.4, 0.4], [0.4, 0.4]]),
+  'shift-pair-slant-place': Object.freeze([[-0.2, 0.3], [0.6, 0.3]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const formatComponent = value => Math.abs(value) < .0005 ? '0.000' : value.toFixed(3);
