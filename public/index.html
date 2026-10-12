@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=857-1">
+  <link rel="stylesheet" href="/style.css?v=864-1">
   <script type="module" src="/app.mjs?v=857-1"></script>
 </head>
 <body>
@@ -228,6 +228,34 @@
       <p>Moving the entire mask turns every arriving wave by the same phase. It changes the sum's direction, not its length. The intensity stays the same.</p>
       <a href="https://www.opticsthewebsite.com/Rectangular">Rectangular opening background</a>
       <a href="https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_(Konijnenberg_Adam_and_Urbach)/06%3A_Scalar_diffraction_optics/6.07%3A_Fresnel_and_Fraunhofer_Approximations">Far-field diffraction — TU Delft / LibreTexts</a>
+    </details>
+    <details id="three-questions-holes-and-stars">
+      <summary>Try three questions about a dark spot</summary>
+      <p>Use Pair and the existing screen probe. The sky shows normalized brightness, not a photograph or a transmitted-energy meter.</p>
+      <section>
+        <h3>Can two lit openings make a dark spot?</h3>
+        <p>Choose Pair with point openings, equal strengths and the same source phase. Set the probe to u = 0.5 and v = 0. Read the arriving arrows as well as the brightness.</p>
+        <details>
+          <summary>Read an answer</summary>
+          <p>Yes. The centers at x = −0.5 and +0.5 give opposite arriving phases at that spot. Their signed components cancel. Each contribution exists even though the sum is dark.</p>
+        </details>
+      </section>
+      <section>
+        <h3>Does a wider gap push that cancellation outward?</h3>
+        <p>Keep the Pair mask. Widen its gap and move the horizontal probe until the first dark spot returns. Watch the coordinates rather than guessing from the sky’s glow.</p>
+        <details>
+          <summary>Read an answer</summary>
+          <p>It moves inward. For two equal point sources separated by gap d, the first horizontal null is at u = 1/(2d). A gap of 1 gives 0.5; a gap of 1.5 gives about 0.333. The rectangular opening envelope is a separate factor.</p>
+        </details>
+      </section>
+      <section>
+        <h3>Does closing one opening restore full brightness?</h3>
+        <p>Choose Ring, point openings and only the chosen opening. Inspect the center. Compare it with lighting all six openings.</p>
+        <details>
+          <summary>Read an answer</summary>
+          <p>No. This toy keeps the complete six-opening normalization. One full-amplitude source contributes brightness 1/36, about 2.778%, at the center. It does not renormalize the single surviving source to 100%. Closing sources and changing the common scale are different operations.</p>
+        </details>
+      </section>
     </details>
     <footer><a href="https://ichabod-crane.net">Made by Ichabod Crane</a></footer>
   </main>
