@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=893-1">
-  <script type="module" src="/app.mjs?v=893-1"></script>
+  <link rel="stylesheet" href="/style.css?v=903-1">
+  <script type="module" src="/app.mjs?v=903-1"></script>
 </head>
 <body>
   <main>
@@ -67,10 +67,16 @@
                   <option value="column-shifted">Right column shifted upward</option>
                   <option value="column-gap">Right column missing its middle</option>
                 </optgroup>
+                <optgroup label="Which corner is absent">
+                  <option value="corner-no-upper-right">Three corners, no upper right</option>
+                  <option value="corner-no-lower-left">Three corners, no lower left</option>
+                  <option value="corner-complete-square">All four corners</option>
+                </optgroup>
               </select>
               <button id="cross-mask-apply" type="button">Use this crossed mask</button>
             </div>
             <p id="cross-mask-help">Compare the same crossed arrangement with its center or one arm missing. This changes openings, not their width or the chosen sky spot. Undo brings the old mask back.</p>
+            <p id="mask-corner-absence-help">The two three-opening masks omit opposite corners of the same square. The third restores all four corners. These are ideal point openings, not square windows. Using changes only the mask; the inspected spot and opening settings stay put.</p>
             <p id="mask-column-help">Two columns can face each other, shift one column upward, or lose its middle opening. The dot coordinates are the experiment; the ideal point openings have no width. Using a mask changes only the openings and chosen identity, not the screen point or opening settings. Undo restores the previous mask.</p>
             <p id="pair-common-shift-help">These pairs keep the same horizontal gap and source order. Moving both openings together turns every arriving arrow by a common phase; the ideal far-field brightness stays the same. The chosen sky spot and opening patches stay put. Undo restores the mask.</p>
             <p id="frame-shear-study-help">All three frames keep four openings. Stretching the horizontal gap changes the spacing of interference; shearing makes a tilted arrangement without changing the opening patches. The chosen sky spot and illumination stay put. Undo restores the prior mask.</p>

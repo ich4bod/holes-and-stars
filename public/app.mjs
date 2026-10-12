@@ -50,6 +50,9 @@ const crossedMasks = Object.freeze({
   'column-facing': Object.freeze([[-0.4, -0.4], [-0.4, 0], [-0.4, 0.4], [0.4, -0.4], [0.4, 0], [0.4, 0.4]]),
   'column-shifted': Object.freeze([[-0.4, -0.4], [-0.4, 0], [-0.4, 0.4], [0.4, -0.2], [0.4, 0.2], [0.4, 0.6]]),
   'column-gap': Object.freeze([[-0.4, -0.4], [-0.4, 0], [-0.4, 0.4], [0.4, -0.4], [0.4, 0.4]]),
+  'corner-no-upper-right': Object.freeze([[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4]]),
+  'corner-no-lower-left': Object.freeze([[0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]]),
+  'corner-complete-square': Object.freeze([[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const formatComponent = value => Math.abs(value) < .0005 ? '0.000' : value.toFixed(3);

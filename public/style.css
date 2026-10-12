@@ -58,6 +58,7 @@ button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold);
 #cross-mask-apply:disabled { opacity: .5; cursor: default; }
 .crossed-mask-controls :focus-visible { outline-color: var(--gold); }
 #cross-mask-help, #eight-mask-help, #pair-spacing-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
+#mask-array-experiments #mask-corner-absence-help { min-width: 0; max-width: 100%; color: var(--muted); font: 16px/1.5 system-ui, sans-serif; margin: 8px 0; overflow-wrap: anywhere; }
 #mask-array-experiments #mask-column-help { max-width: 100%; color: var(--muted); font: 16px/1.5 system-ui, sans-serif; margin: 8px 0; overflow-wrap: anywhere; }
 #mask-array-experiments #pair-common-shift-help { min-width: 0; max-width: 100%; color: var(--muted); font: 16px/1.5 system-ui, sans-serif; margin: 8px 0; overflow-wrap: anywhere; }
 #mask-array-experiments #frame-shear-study-help { min-width: 0; max-width: 100%; color: var(--muted); font: 16px/1.5 system-ui, sans-serif; margin: 8px 0; overflow-wrap: anywhere; }
