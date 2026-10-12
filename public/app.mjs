@@ -38,6 +38,9 @@ const crossedMasks = Object.freeze({
   'eight-comb': Object.freeze([[-.6, -.2], [-.2, -.2], [.2, -.2], [.6, -.2], [-.6, .2], [-.2, .2], [.2, .2], [.6, .2]]),
   'eight-frame': Object.freeze([[-.6, -.6], [0, -.6], [.6, -.6], [.6, 0], [.6, .6], [0, .6], [-.6, .6], [-.6, 0]]),
   'eight-corner': Object.freeze([[-.6, -.6], [0, -.6], [.6, -.6], [-.6, 0], [0, 0], [.6, 0], [-.6, .6], [0, .6]]),
+  'pair-close': Object.freeze([[-0.25, 0], [0.25, 0]]),
+  'pair-far': Object.freeze([[-0.75, 0], [0.75, 0]]),
+  'pair-up': Object.freeze([[0, -0.75], [0, 0.75]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const formatComponent = value => Math.abs(value) < .0005 ? '0.000' : value.toFixed(3);

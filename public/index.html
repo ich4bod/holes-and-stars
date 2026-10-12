@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
-  <link rel="stylesheet" href="/style.css?v=844-1">
-  <script type="module" src="/app.mjs?v=844-1"></script>
+  <link rel="stylesheet" href="/style.css?v=857-1">
+  <script type="module" src="/app.mjs?v=857-1"></script>
 </head>
 <body>
   <main>
@@ -47,10 +47,16 @@
                 <option value="eight-comb">Eight in two rows</option>
                 <option value="eight-frame">A square frame</option>
                 <option value="eight-corner">A lattice missing one corner</option>
+                <optgroup label="Two gaps, two directions">
+                  <option value="pair-close">Two close openings</option>
+                  <option value="pair-far">Two widely spaced openings</option>
+                  <option value="pair-up">The wide pair turned upward</option>
+                </optgroup>
               </select>
               <button id="cross-mask-apply" type="button">Use this crossed mask</button>
             </div>
             <p id="cross-mask-help">Compare the same crossed arrangement with its center or one arm missing. This changes openings, not their width or the chosen sky spot. Undo brings the old mask back.</p>
+            <p id="pair-spacing-help">Each mask keeps exactly two point sources. A wider gap places the first horizontal cancellation nearer the center; turning the pair turns that direction. The screen spot, opening envelope and kept mask stay put.</p>
             <p id="eight-mask-help">Each mask has eight point sources on the same normalized scale. A comb, a frame and a missing corner change the gaps and their directions, not the chosen screen spot or opening width.</p>
           </details>
         </div>
