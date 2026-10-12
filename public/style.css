@@ -51,6 +51,7 @@ button[aria-pressed="true"] { color: var(--selected); border-color: var(--gold);
 #mask-array-experiments .array-experiment-buttons [data-preset="diamond"],
 #mask-array-experiments .array-experiment-buttons [data-preset="narrow"] { min-height: 45px; font: 16px system-ui, sans-serif; }
 #array-presets-help { color: var(--muted); font-size: 16px; margin: 12px 0; }
+#mask-array-experiments #choice-note-holes-and-stars { min-width: 0; max-width: 100%; color: var(--muted); font: 16px/1.5 system-ui, sans-serif; margin: 8px 0; overflow-wrap: anywhere; }
 .crossed-mask-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .crossed-mask-controls label { flex: 1 1 120px; font: 16px system-ui, sans-serif; }
 #cross-mask { flex: 2 1 180px; min-width: 0; min-height: 45px; padding: 8px; color: #eef4ff; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font: 16px system-ui, sans-serif; }

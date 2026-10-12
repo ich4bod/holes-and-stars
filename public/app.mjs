@@ -55,6 +55,15 @@ const crossedMasks = Object.freeze({
   'corner-complete-square': Object.freeze([[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
+const selectedChoiceNotes = Object.freeze({
+  'corner-no-upper-right': 'About the selected choice: The omitted corner is at positive x and positive y. Three equal-phase point sources would all agree at the screen origin; other illumination choices remain yours.',
+  'corner-no-lower-left': 'About the selected choice: The omitted corner is at negative x and negative y. This exchanges which corner is missing; it does not move your screen probe or reset phase and strength choices.',
+  'corner-complete-square': 'About the selected choice: All four corners are present, at x and y values of minus or plus 0.4. More openings change the source sum as well as the gaps; a finite opening envelope remains a separate setting.',
+});
+const updateSelectedChoiceNote = () => {
+  $('#choice-note-holes-and-stars').textContent = selectedChoiceNotes[crossMask.value]
+    ?? 'Other choices keep their existing descriptions.';
+};
 const formatComponent = value => Math.abs(value) < .0005 ? '0.000' : value.toFixed(3);
 const snapshot = () => ({ points: copyPoints(state.points), selected: state.selected });
 const sameMask = (a, b) => a.length === b.length && a.every((point, index) =>
@@ -120,7 +129,10 @@ function updateCrossMaskButton() {
   crossMaskApply.disabled = gesture !== null || sameMask(candidate, state.points);
 }
 
-crossMask.addEventListener('change', updateCrossMaskButton);
+crossMask.addEventListener('change', () => {
+  updateCrossMaskButton();
+  updateSelectedChoiceNote();
+});
 crossMaskApply.addEventListener('click', () => {
   const candidate = crossedMaskCandidate(crossMask.value);
   if (gesture !== null || sameMask(candidate, state.points)) return;
@@ -731,6 +743,7 @@ function cancelGesture(event) {
 mask.addEventListener('pointercancel', cancelGesture);
 mask.addEventListener('lostpointercapture', cancelGesture);
 
+updateSelectedChoiceNote();
 renderSource();
 renderProbe();
 drawSky();
