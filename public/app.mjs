@@ -62,6 +62,9 @@ const crossedMasks = Object.freeze({
   'pairs-horizontal': Object.freeze([[-0.2, -0.6], [0.2, -0.6], [-0.2, 0], [0.2, 0], [-0.2, 0.6], [0.2, 0.6]]),
   'pairs-diagonal': Object.freeze([[-0.12, -0.76], [0.12, -0.44], [-0.12, -0.16], [0.12, 0.16], [-0.12, 0.44], [0.12, 0.76]]),
   'pairs-vertical': Object.freeze([[0, -0.8], [0, -0.4], [0, -0.2], [0, 0.2], [0, 0.4], [0, 0.8]]),
+  'square-half-both': Object.freeze([[-0.25, -0.25], [0.25, -0.25], [-0.25, 0.25], [0.25, 0.25]]),
+  'square-half-x': Object.freeze([[-0.25, -0.5], [0.25, -0.5], [-0.25, 0.5], [0.25, 0.5]]),
+  'square-half-y': Object.freeze([[-0.5, -0.25], [0.5, -0.25], [-0.5, 0.25], [0.5, 0.25]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const selectedChoiceNotes = Object.freeze({
@@ -77,6 +80,9 @@ const selectedChoiceNotes = Object.freeze({
   'pairs-horizontal': 'About the selected choice: Three pair centers lie on the vertical axis. Each horizontal pair has a 0.4-mask-unit gap.',
   'pairs-diagonal': 'About the selected choice: Each pair turns diagonally around its own center. The 0.24 by 0.32 displacement still has length 0.4 mask units.',
   'pairs-vertical': 'About the selected choice: Each pair turns upright around its own center. Pair gaps remain 0.4; the three centers stay at -0.6, 0 and 0.6.',
+  'square-half-both': 'About the selected choice: Four points form a square with horizontal and vertical gaps one-half. Smaller gaps spread their corresponding fringes farther apart.',
+  'square-half-x': 'About the selected choice: The horizontal gap is one-half while the vertical gap is one. The mask is a rectangle; changing one gap need not change both fringe directions.',
+  'square-half-y': 'About the selected choice: The vertical gap is one-half while the horizontal gap is one. This exchanges the two gap directions, not the source phase or opening width.',
 });
 const updateSelectedChoiceNote = () => {
   $('#choice-note-holes-and-stars').textContent = selectedChoiceNotes[crossMask.value]
