@@ -1,0 +1,96 @@
+{
+  "crosses": {
+    "mode": "crosses",
+    "picker": "cross-mask",
+    "noteID": "choice-note-holes-and-stars",
+    "noteLead": "About the selected choice: ",
+    "slug": "holes-and-stars",
+    "lane": 20,
+    "title": "Holes & Stars — Keep neighboring gaps while the line gains openings",
+    "group": "The same neighboring gap",
+    "rows": [
+      [
+        "line-count-2",
+        "Two equally spaced openings",
+        [
+          [
+            -0.1,
+            0
+          ],
+          [
+            0.1,
+            0
+          ]
+        ]
+      ],
+      [
+        "line-count-4",
+        "Four equally spaced openings",
+        [
+          [
+            -0.3,
+            0
+          ],
+          [
+            -0.1,
+            0
+          ],
+          [
+            0.1,
+            0
+          ],
+          [
+            0.3,
+            0
+          ]
+        ]
+      ],
+      [
+        "line-count-8",
+        "Eight equally spaced openings",
+        [
+          [
+            -0.7,
+            0
+          ],
+          [
+            -0.5,
+            0
+          ],
+          [
+            -0.3,
+            0
+          ],
+          [
+            -0.1,
+            0
+          ],
+          [
+            0.1,
+            0
+          ],
+          [
+            0.3,
+            0
+          ],
+          [
+            0.5,
+            0
+          ],
+          [
+            0.7,
+            0
+          ]
+        ]
+      ]
+    ],
+    "notes": [
+      "Two equal in-phase points have a neighboring gap of one-fifth mask unit. Normalized point intensity at the center is one; the first horizontal null is at u two-and-a-half.",
+      "Four equal in-phase points keep the one-fifth neighboring gap. The center remains one, but the first horizontal null moves to u one-and-a-quarter.",
+      "Eight points keep the same neighboring gap and center intensity. The first horizontal null is at u five-eighths. More points narrow this central peak without changing the point-opening patch."
+    ],
+    "facts": "Ideal equal in-phase point intensity normalized by N squared. N=2/4/8,gap d=.2,centered x_i=.2*(i-(N-1)/2),y0; center I=1 and first null u=1/(N*d)=2.5/1.25/.625. Source phase/strength/illumination,finite opening shape/width/height and probe/profile unchanged. Claims expressly ideal point case. Max8 existing mask capacity; x sliders .01 represent all coordinates.",
+    "dep": 988,
+    "message": "crosses afternoon relationships preserve exact choices and independent memory"
+  }
+}
