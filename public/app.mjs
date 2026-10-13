@@ -71,6 +71,9 @@ const crossedMasks = Object.freeze({
   'middle-five': Object.freeze([[-0.8, 0], [-0.4, 0], [0, 0], [0.4, 0], [0.8, 0]]),
   'middle-absent': Object.freeze([[-0.8, 0], [-0.4, 0], [0.4, 0], [0.8, 0]]),
   'middle-raised': Object.freeze([[-0.8, 0], [-0.4, 0], [0, 0.4], [0.4, 0], [0.8, 0]]),
+  'line-count-2': Object.freeze([[-.1, 0], [.1, 0]]),
+  'line-count-4': Object.freeze([[-.3, 0], [-.1, 0], [.1, 0], [.3, 0]]),
+  'line-count-8': Object.freeze([[-.7, 0], [-.5, 0], [-.3, 0], [-.1, 0], [.1, 0], [.3, 0], [.5, 0], [.7, 0]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const selectedChoiceNotes = Object.freeze({
@@ -95,6 +98,9 @@ const selectedChoiceNotes = Object.freeze({
   'middle-five': 'About the selected choice: Five point openings share a horizontal line with gaps of 0.4 toy units. The middle opening contributes to the sum.',
   'middle-absent': 'About the selected choice: The middle opening is removed. Four sources remain, and the central gap is now 0.8 toy units. This changes the source count as well as the gaps.',
   'middle-raised': 'About the selected choice: The same fifth opening moves 0.4 toy units upward. The outer four stay on the line; the mask is no longer one-dimensional.',
+  'line-count-2': 'About the selected choice: Two equal in-phase points have a neighboring gap of one-fifth mask unit. Normalized point intensity at the center is one; the first horizontal null is at u two-and-a-half.',
+  'line-count-4': 'About the selected choice: Four equal in-phase points keep the one-fifth neighboring gap. The center remains one, but the first horizontal null moves to u one-and-a-quarter.',
+  'line-count-8': 'About the selected choice: Eight points keep the same neighboring gap and center intensity. The first horizontal null is at u five-eighths. More points narrow this central peak without changing the point-opening patch.',
 });
 const updateSelectedChoiceNote = () => {
   $('#choice-note-holes-and-stars').textContent = selectedChoiceNotes[crossMask.value]
