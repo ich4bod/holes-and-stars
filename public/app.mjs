@@ -53,12 +53,30 @@ const crossedMasks = Object.freeze({
   'corner-no-upper-right': Object.freeze([[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4]]),
   'corner-no-lower-left': Object.freeze([[0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]]),
   'corner-complete-square': Object.freeze([[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]]),
+  'line-even': Object.freeze([[-0.75, 0], [-0.25, 0], [0.25, 0], [0.75, 0]]),
+  'line-inner': Object.freeze([[-0.75, 0], [-0.1, 0], [0.1, 0], [0.75, 0]]),
+  'line-outer': Object.freeze([[-0.75, 0], [-0.6, 0], [0.6, 0], [0.75, 0]]),
+  'triangle-center': Object.freeze([[-0.4, -0.2], [0.4, -0.2], [0, 0.4]]),
+  'triangle-above': Object.freeze([[-0.4, 0], [0.4, 0], [0, 0.6]]),
+  'triangle-right': Object.freeze([[-0.2, -0.2], [0.6, -0.2], [0.2, 0.4]]),
+  'pairs-horizontal': Object.freeze([[-0.2, -0.6], [0.2, -0.6], [-0.2, 0], [0.2, 0], [-0.2, 0.6], [0.2, 0.6]]),
+  'pairs-diagonal': Object.freeze([[-0.12, -0.76], [0.12, -0.44], [-0.12, -0.16], [0.12, 0.16], [-0.12, 0.44], [0.12, 0.76]]),
+  'pairs-vertical': Object.freeze([[0, -0.8], [0, -0.4], [0, -0.2], [0, 0.2], [0, 0.4], [0, 0.8]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const selectedChoiceNotes = Object.freeze({
   'corner-no-upper-right': 'About the selected choice: The omitted corner is at positive x and positive y. Three equal-phase point sources would all agree at the screen origin; other illumination choices remain yours.',
   'corner-no-lower-left': 'About the selected choice: The omitted corner is at negative x and negative y. This exchanges which corner is missing; it does not move your screen probe or reset phase and strength choices.',
   'corner-complete-square': 'About the selected choice: All four corners are present, at x and y values of minus or plus 0.4. More openings change the source sum as well as the gaps; a finite opening envelope remains a separate setting.',
+  'line-even': 'About the selected choice: Four point openings span one and a half mask units, with equal half-unit gaps. Illumination and the inspected spot stay put.',
+  'line-inner': 'About the selected choice: The same outer openings frame a close inner pair. The middle gap is 0.2 mask units; this is not a continuous slit.',
+  'line-outer': 'About the selected choice: Four openings gather into two outer pairs, with within-pair gaps of 0.15 mask units and a central gap of 1.2.',
+  'triangle-center': 'About the selected choice: Three ideal point openings make the centered triangle. Using changes the mask, not the selected illumination or spot.',
+  'triangle-above': 'About the selected choice: Every source moves up by 0.2 mask units. Relative gaps are unchanged; a common translation changes shared phase, not ideal point-array brightness.',
+  'triangle-right': 'About the selected choice: Every source moves right by 0.2 mask units. Relative gaps are unchanged. This is a common move of the array, not of the inspected sky spot.',
+  'pairs-horizontal': 'About the selected choice: Three pair centers lie on the vertical axis. Each horizontal pair has a 0.4-mask-unit gap.',
+  'pairs-diagonal': 'About the selected choice: Each pair turns diagonally around its own center. The 0.24 by 0.32 displacement still has length 0.4 mask units.',
+  'pairs-vertical': 'About the selected choice: Each pair turns upright around its own center. Pair gaps remain 0.4; the three centers stay at -0.6, 0 and 0.6.',
 });
 const updateSelectedChoiceNote = () => {
   $('#choice-note-holes-and-stars').textContent = selectedChoiceNotes[crossMask.value]

@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080e19">
   <title>Holes &amp; Stars</title>
   <link rel="stylesheet" href="/style.css?v=911-1">
-  <script type="module" src="/app.mjs?v=911-1"></script>
+  <script type="module" src="/app.mjs?v=937-1"></script>
 </head>
 <body>
   <main>
@@ -72,6 +72,21 @@
                   <option value="corner-no-lower-left">Three corners, no lower left</option>
                   <option value="corner-complete-square">All four corners</option>
                 </optgroup>
+                <optgroup label="Four openings, uneven gaps">
+                  <option value="line-even">Four evenly spaced openings</option>
+                  <option value="line-inner">A close inner pair</option>
+                  <option value="line-outer">Two close outer pairs</option>
+                </optgroup>
+                <optgroup label="One triangle, three places">
+                  <option value="triangle-center">Triangle at the center</option>
+                  <option value="triangle-above">Triangle translated up</option>
+                  <option value="triangle-right">Triangle translated right</option>
+                </optgroup>
+                <optgroup label="Three pairs, three directions">
+                  <option value="pairs-horizontal">Three horizontal pairs</option>
+                  <option value="pairs-diagonal">Three diagonal pairs</option>
+                  <option value="pairs-vertical">Three vertical pairs</option>
+                </optgroup>
               </select>
               <button id="cross-mask-apply" type="button">Use this crossed mask</button>
             </div>
@@ -90,9 +105,9 @@
         <div id="hole-list" class="hole-list"></div>
         <div class="positions">
           <label for="hole-x">Hole x <output id="hole-x-value">-0.50</output></label>
-          <input id="hole-x" type="range" min="-1" max="1" step=".05" value="-.5">
+          <input id="hole-x" type="range" min="-1" max="1" step=".01" value="-.5">
           <label for="hole-y">Hole y <output id="hole-y-value">0.00</output></label>
-          <input id="hole-y" type="range" min="-1" max="1" step=".05" value="0">
+          <input id="hole-y" type="range" min="-1" max="1" step=".01" value="0">
         </div>
         <button id="remove-hole" type="button">Remove hole</button>
         <div class="mask-history">
