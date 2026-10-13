@@ -68,6 +68,9 @@ const crossedMasks = Object.freeze({
   'one-gap-horizontal': Object.freeze([[-0.5, 0], [0.5, 0]]),
   'one-gap-diagonal': Object.freeze([[-0.3, -0.4], [0.3, 0.4]]),
   'one-gap-vertical': Object.freeze([[0, -0.5], [0, 0.5]]),
+  'middle-five': Object.freeze([[-0.8, 0], [-0.4, 0], [0, 0], [0.4, 0], [0.8, 0]]),
+  'middle-absent': Object.freeze([[-0.8, 0], [-0.4, 0], [0.4, 0], [0.8, 0]]),
+  'middle-raised': Object.freeze([[-0.8, 0], [-0.4, 0], [0, 0.4], [0.4, 0], [0.8, 0]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const selectedChoiceNotes = Object.freeze({
@@ -89,6 +92,9 @@ const selectedChoiceNotes = Object.freeze({
   'one-gap-horizontal': 'About the selected choice: Two ideal point sources have a one-mask-unit horizontal gap. Under equal in-phase illumination the first horizontal null is at u one-half.',
   'one-gap-diagonal': 'About the selected choice: The gap turns: 0.6 across and 0.8 up have length one. Under equal in-phase point illumination, the first null satisfies 0.6u + 0.8v = one-half.',
   'one-gap-vertical': 'About the selected choice: The one-unit gap is vertical now. Under equal in-phase point illumination the first vertical null is at v one-half; a horizontal profile need not show it.',
+  'middle-five': 'About the selected choice: Five point openings share a horizontal line with gaps of 0.4 toy units. The middle opening contributes to the sum.',
+  'middle-absent': 'About the selected choice: The middle opening is removed. Four sources remain, and the central gap is now 0.8 toy units. This changes the source count as well as the gaps.',
+  'middle-raised': 'About the selected choice: The same fifth opening moves 0.4 toy units upward. The outer four stay on the line; the mask is no longer one-dimensional.',
 });
 const updateSelectedChoiceNote = () => {
   $('#choice-note-holes-and-stars').textContent = selectedChoiceNotes[crossMask.value]
