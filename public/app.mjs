@@ -65,6 +65,9 @@ const crossedMasks = Object.freeze({
   'square-half-both': Object.freeze([[-0.25, -0.25], [0.25, -0.25], [-0.25, 0.25], [0.25, 0.25]]),
   'square-half-x': Object.freeze([[-0.25, -0.5], [0.25, -0.5], [-0.25, 0.5], [0.25, 0.5]]),
   'square-half-y': Object.freeze([[-0.5, -0.25], [0.5, -0.25], [-0.5, 0.25], [0.5, 0.25]]),
+  'one-gap-horizontal': Object.freeze([[-0.5, 0], [0.5, 0]]),
+  'one-gap-diagonal': Object.freeze([[-0.3, -0.4], [0.3, 0.4]]),
+  'one-gap-vertical': Object.freeze([[0, -0.5], [0, 0.5]]),
 });
 const crossedMaskCandidate = id => crossedMasks[id].map(([x, y]) => ({ x, y }));
 const selectedChoiceNotes = Object.freeze({
@@ -83,6 +86,9 @@ const selectedChoiceNotes = Object.freeze({
   'square-half-both': 'About the selected choice: Four points form a square with horizontal and vertical gaps one-half. Smaller gaps spread their corresponding fringes farther apart.',
   'square-half-x': 'About the selected choice: The horizontal gap is one-half while the vertical gap is one. The mask is a rectangle; changing one gap need not change both fringe directions.',
   'square-half-y': 'About the selected choice: The vertical gap is one-half while the horizontal gap is one. This exchanges the two gap directions, not the source phase or opening width.',
+  'one-gap-horizontal': 'About the selected choice: Two ideal point sources have a one-mask-unit horizontal gap. Under equal in-phase illumination the first horizontal null is at u one-half.',
+  'one-gap-diagonal': 'About the selected choice: The gap turns: 0.6 across and 0.8 up have length one. Under equal in-phase point illumination, the first null satisfies 0.6u + 0.8v = one-half.',
+  'one-gap-vertical': 'About the selected choice: The one-unit gap is vertical now. Under equal in-phase point illumination the first vertical null is at v one-half; a horizontal profile need not show it.',
 });
 const updateSelectedChoiceNote = () => {
   $('#choice-note-holes-and-stars').textContent = selectedChoiceNotes[crossMask.value]
