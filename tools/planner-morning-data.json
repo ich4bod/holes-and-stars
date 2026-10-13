@@ -1,0 +1,85 @@
+{
+  "study": {
+    "mode": "crosses",
+    "group": "Square gaps on two axes",
+    "rows": [
+      [
+        "square-half-both",
+        "Half gaps on both axes",
+        [
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            0.25,
+            -0.25
+          ],
+          [
+            -0.25,
+            0.25
+          ],
+          [
+            0.25,
+            0.25
+          ]
+        ]
+      ],
+      [
+        "square-half-x",
+        "Half horizontal gap only",
+        [
+          [
+            -0.25,
+            -0.5
+          ],
+          [
+            0.25,
+            -0.5
+          ],
+          [
+            -0.25,
+            0.5
+          ],
+          [
+            0.25,
+            0.5
+          ]
+        ]
+      ],
+      [
+        "square-half-y",
+        "Half vertical gap only",
+        [
+          [
+            -0.5,
+            -0.25
+          ],
+          [
+            0.5,
+            -0.25
+          ],
+          [
+            -0.5,
+            0.25
+          ],
+          [
+            0.5,
+            0.25
+          ]
+        ]
+      ]
+    ],
+    "notes": [
+      "Four points form a square with horizontal and vertical gaps one-half. Smaller gaps spread their corresponding fringes farther apart.",
+      "The horizontal gap is one-half while the vertical gap is one. The mask is a rectangle; changing one gap need not change both fringe directions.",
+      "The vertical gap is one-half while the horizontal gap is one. This exchanges the two gap directions, not the source phase or opening width."
+    ],
+    "noteID": "choice-note-holes-and-stars",
+    "noteLead": "About the selected choice: ",
+    "picker": "cross-mask",
+    "facts": "Point-source normalized intensity |sumexp(i2π(ux+vy))|²/N². Equalphase square factor cos²(πu gapx)cos²(πv gapy). Firstaxisnull1/(2gap); gap.5=>1,gap1=>.5. Finite opening envelope staysseparate and illumination settings unchanged.",
+    "dep": 911,
+    "message": "crosses histories keep their authored relationship and independent memory"
+  }
+}
