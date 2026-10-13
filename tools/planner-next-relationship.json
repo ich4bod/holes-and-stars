@@ -1,0 +1,61 @@
+{
+  "crosses": {
+    "mode": "crosses",
+    "group": "One gap in three directions",
+    "rows": [
+      [
+        "one-gap-horizontal",
+        "One-unit horizontal gap",
+        [
+          [
+            -0.5,
+            0
+          ],
+          [
+            0.5,
+            0
+          ]
+        ]
+      ],
+      [
+        "one-gap-diagonal",
+        "One-unit diagonal gap",
+        [
+          [
+            -0.3,
+            -0.4
+          ],
+          [
+            0.3,
+            0.4
+          ]
+        ]
+      ],
+      [
+        "one-gap-vertical",
+        "One-unit vertical gap",
+        [
+          [
+            0,
+            -0.5
+          ],
+          [
+            0,
+            0.5
+          ]
+        ]
+      ]
+    ],
+    "notes": [
+      "Two ideal point sources have a one-mask-unit horizontal gap. Under equal in-phase illumination the first horizontal null is at u one-half.",
+      "The gap turns: 0.6 across and 0.8 up have length one. Under equal in-phase point illumination, the first null satisfies 0.6u + 0.8v = one-half.",
+      "The one-unit gap is vertical now. Under equal in-phase point illumination the first vertical null is at v one-half; a horizontal profile need not show it."
+    ],
+    "facts": "Gaplength1 allrows:.6\u00b2+.8\u00b2=1. Equal-phase/equal-strength point intensity cos\u00b2(pi(d_x*u+d_y*v)); firstnull d\u00b7spot=.5. Preserve actual illumination/envelope/probe, so notes state conditions not promise current null.",
+    "dep": 937,
+    "picker": "cross-mask",
+    "noteID": "choice-note-holes-and-stars",
+    "noteLead": "About the selected choice: ",
+    "message": "crosses comparisons keep exact choices silent and reversible"
+  }
+}
